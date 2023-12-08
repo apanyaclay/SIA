@@ -35,7 +35,7 @@
             
             <tbody >
                 <tr>
-                   
+                   @foreach($siswas as $siswa)
                     <td>{{ $siswa->NISN }}</td>
                     <td>{{ $siswa->NIPD }}</td>
                     <td>{{ $siswa->Nama_Siswa }}</td>
@@ -54,9 +54,7 @@
                     <td>{{ $siswa->Bank_Atas_Nama }}</td>
                     <td>{{ $siswa->Status_Siswa }}</td>
                     <td>{{ $siswa->Sekolah_Asal }}</td>
-                    
-               
-                
+                    @endforeach
                 </tr>
             
       

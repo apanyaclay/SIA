@@ -1,7 +1,7 @@
 @extends('layouts.main_superadmin')
 
 @section('container')
-<div class="edit text-sm-end"><a  type="button" class="btn btn-secondary mt-3 mb-3"  href="/tambahmapel-superadmin"><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i> Tambah Mata Pelajaran</a></div>
+<div class="edit text-sm-end"><a  type="button" class="btn btn-secondary mt-3 mb-3"  href="{{route('tambahmapel')}}"><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i> Tambah Mata Pelajaran</a></div>
 
 <!-- Page Heading -->
 <h1 class="jadwal h3 mb-0 text-gray-800" style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; text-align: center;"> DAFTAR MATA PELAJARAN KELAS (XA) </h1></div>

@@ -18,7 +18,7 @@
                      <tr>
                        <th scope="row">1</th>
                        <td>YOHANA</td>
-                       <td><a type="button"  href="/raporsiswa-superadmin"  class="btn btn-warning"> Lihat Rapor</a></td>
+                       <td><a type="button"  href="{{route('raporsiswasadmin')}}"  class="btn btn-warning"> Lihat Rapor</a></td>
                      <td>
                          <input type="radio" class="btn-check" name="options-outlined"  >
                          <label class="btn btn-outline-success" for="success-outlined">CONFIRM</label>
@@ -30,7 +30,7 @@
                      <tr>
                        <th scope="row">2</th>
                        <td>KEISYA</td>
-                       <td><a type="button"  href="/raporsiswa-superadmin"  class="btn btn-warning"> Lihat Rapor</a></td>
+                       <td><a type="button"  href="{{route('raporsiswasadmin')}}"  class="btn btn-warning"> Lihat Rapor</a></td>
                      <td>
                          <input type="radio" class="btn-check" name="options-outlined"  >
                          <label class="btn btn-outline-success" for="success-outlined">CONFIRM</label>
@@ -42,7 +42,7 @@
                      <tr>
                        <th scope="row">3</th>
                        <td>SAKIFA</td>
-                       <td><a type="button"  href="/raporsiswa-superadmin"  class="btn btn-warning"> Lihat Rapor</a></td>
+                       <td><a type="button"  href="{{route('raporsiswasadmin')}}"  class="btn btn-warning"> Lihat Rapor</a></td>
                      <td>
                          <input type="radio" class="btn-check" name="options-outlined"  >
                          <label class="btn btn-outline-success" for="success-outlined">CONFIRM</label>
@@ -54,7 +54,7 @@
                      <tr>
                          <th scope="row">4</th> <!--dengan looping-->
                          <td>DIVA</td>
-                         <td><a type="button"  href="/raporsiswa-superadmin"  class="btn btn-warning"> Lihat Rapor</a></td>
+                         <td><a type="button"  href="{{route('raporsiswasadmin')}}"  class="btn btn-warning"> Lihat Rapor</a></td>
                      <td>
                          <input type="radio" class="btn-check" name="options-outlined"  >
                          <label class="btn btn-outline-success" for="success-outlined">CONFIRM</label>
@@ -66,7 +66,7 @@
                      <tr>
                        <th scope="row">5</th> <!--dengan looping-->
                        <td>NAUFAL</td>
-                       <td><a type="button"  href="/raporsiswa-superadmin"  class="btn btn-warning"> Lihat Rapor</a></td>
+                       <td><a type="button"  href="{{route('raporsiswasadmin')}}"  class="btn btn-warning"> Lihat Rapor</a></td>
                      <td>
                          <input type="radio" class="btn-check" name="options-outlined"  >
                          <label class="btn btn-outline-success" for="success-outlined">CONFIRM</label>
@@ -77,7 +77,7 @@
                      <tr>
                          <th scope="row">6</th> <!--dengan looping-->
                          <td>DAGUL</td>
-                         <td><a type="button"  href="/raporsiswa-superadmin"  class="btn btn-warning"> Lihat Rapor</a></td>
+                         <td><a type="button"  href="{{route('raporsiswasadmin')}}"  class="btn btn-warning"> Lihat Rapor</a></td>
                        <td>
                          <input type="radio" class="btn-check" name="options-outlined"  >
                          <label class="btn btn-outline-success" for="success-outlined">CONFIRM</label>

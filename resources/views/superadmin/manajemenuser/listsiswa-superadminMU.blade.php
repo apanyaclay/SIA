@@ -2,7 +2,7 @@
 
 @section('container')
 
-<div class="edit text-sm-end"><a href="/tambahsiswa-superadminMU" type="button" class="btn btn-secondary mt-3 mb-3" ><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i> Tambah  Siswa</a></div>
+<div class="edit text-sm-end"><a href="{{route('tambahsiswasadmin')}}" type="button" class="btn btn-secondary mt-3 mb-3" ><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i> Tambah  Siswa</a></div>
                 
 
 <!-- Page Heading -->
@@ -29,14 +29,14 @@
               <tr>
                   @foreach($absensi_kelas as $listsiswa)
                   <td>{{ $listsiswa->ID_Absensi }}</td>
-                  <td>{{ $listsiswa->ID_Siswa }}</td>
+                  <td>{{ $listsiswa->Siswa_ID }}</td>
                   <td>{{ $listsiswa->Kelas }}</td>
                   <td>{{ $listsiswa->Tanggal }}</td>
                   <td>{{ $listsiswa->Hadir }}</td>
                   <td>{{ $listsiswa->Izin }}</td>
                   <td>{{ $listsiswa->Alpa }}</td>
                   <td>{{ $listsiswa->Sakit }}</td>
-                  <td><a type="button"  href="{{ url('/detailsiswa-superadminMU', $listsiswa->NISN) }}"  class="btn btn-warning">Lihat Detail</a></td>
+                  <td><a type="button"  href="{{ url('/superadmin/detailsiswa', $listsiswa->Siswa_ID) }}"  class="btn btn-warning">Lihat Detail</a></td>
                   <td>
                     <!-- Button trigger modal -->
              <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">

@@ -21,15 +21,19 @@ class KepsekController extends Controller
     }
 
     public function listsiswa () {
-        return view('superadmin.manajemenuser.listsiswa-superadminMU');
+        $absensi_kelas = DB::select('SELECT * FROM absensi_kelas');
+
+        return view('superadmin.manajemenuser.listsiswa-superadminMU', compact('absensi_kelas'));
     }
 
     public function tambahsiswa () {
         return view('superadmin.manajemenuser.tambahsiswa-superadminMU');
     }
 
-    public function detailsiswa () {
-        return view('superadmin.manajemenuser.detailsiswa-superadminMU');
+    public function detailsiswa ($nisn) {
+        $siswas = DB::select('SELECT * FROM siswas WHERE NISN= ?',[$nisn]);
+
+        return view('superadmin.manajemenuser.detailsiswa-superadminMU', compact('siswas'));
     }
 
     public function daftarptk () {
@@ -109,7 +113,9 @@ class KepsekController extends Controller
     }
 
     public function daftarekskul () {
-        return view('superadmin/daftarekskul-superadmin');
+        $ekstrakurikuler = DB::select('SELECT * FROM ekstrakurikulers');
+
+        return view('superadmin/daftarekskul-superadmin', compact('ekstrakurikuler'));
     }
 
     public function tambahekskul () {
@@ -125,7 +131,9 @@ class KepsekController extends Controller
     }
 
     public function profile () {
-        return view('superadmin/profile-superadmin');
+        $kepala_sekolah = DB::select('SELECT * FROM kepala_sekolahs');
+        
+        return view('superadmin/profile-superadmin', compact('kepala_sekolah'));
     }
 
     public function editprofile () {

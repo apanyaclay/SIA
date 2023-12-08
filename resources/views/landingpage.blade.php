@@ -25,7 +25,13 @@
         </a> 
         <form class="d-flex">
           <!-- <input style="width: 400px; ;" class="form-control me-2" type="search" placeholder="Search an Airport" aria-label="Search"> -->
-          <a href="/login" style="background-color: #f8af7b; font-weight: bolder;" class="btn btn-outline-success mx-3">M A S U K</a>
+          @if(auth()->check())
+              <!-- Tampilkan tautan logout jika pengguna sudah masuk -->
+              <a href="/dashboard" style="background-color: #f8af7b; font-weight: bolder;" class="btn btn-outline-success mx-3">DASHBOARD</a>
+          @else
+              <!-- Tampilkan tautan login jika pengguna belum masuk -->
+              <a href="/login" style="background-color: #f8af7b; font-weight: bolder;" class="btn btn-outline-success mx-3">M A S U K</a>
+          @endif
 
         
         </form>

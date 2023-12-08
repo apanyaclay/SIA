@@ -4,11 +4,10 @@
    <!-- Page Heading -->
    <div class="isi ">
     <h1 class="jadwal h3 mb-0 text-gray-800" style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; text-align: center;"> PROFILE &nbsp;  LENGKAP</h1></div>
-<div class="edit text-sm-end"><a type="button" href="/editprofile-superadmin" class="btn btn-secondary mt-3 mb-3" ><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i> Edit Profil</a></div>                       
+<div class="edit text-sm-end"><a type="button" href="{{route('editprofilesadmin')}}" class="btn btn-secondary mt-3 mb-3" ><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i> Edit Profil</a></div>                       
     <div class="informasi py-3 px-3">
       
        <table class="table  mt-4">
-       
         <tr>
           <th>ID_Kepsek</th>
           <th>Nama_Kepsek</th>
@@ -18,12 +17,9 @@
           <th>Tanggal_Lahir</th>
           <th>TMT_Kerja</th>
           <th>Status</th>
-          
-          
-          
       </tr>
   </thead>
- <tbody>
+    <tbody>
       <tr>
        @foreach($kepala_sekolah as $kepsek)
        <td>{{ $kepsek->ID_Kepsek}}</td>
@@ -34,10 +30,9 @@
        <td>{{ $kepsek->Tanggal_Lahir }}</td>
        <td>{{ $kepsek->TMT_Kerja }}</td>
        <td>{{ $kepsek->Status }}</td>
-       
-       
       </tr> 
       @endforeach
+      <tbody>
    </table>
     </div>
    <!-- <button type="button" class="btn btn-secondary mt-3 mb-3" >Print Jadwal</button> -->

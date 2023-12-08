@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masuk</title>
+    <title>Forget Password</title>
     <link rel="stylesheet" href="{{ asset('assets/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
@@ -23,14 +23,13 @@
     <div class="limiter">
       <div class="container-login100">
         <div class="wrap-login100">
-          <form class="login100-form validate-form">
+          <form class="login100-form validate-form" method="POST" action="{{ route('forgot-password-process') }}">
+            @csrf
             <span class="login100-form-title p-b-43" style="font-weight: bolder; color: #ff852d;">
                 RESET PASSWORD
             </span>  <br>         
-            
-            
             <div class="form-group py-3">
-                <input type="email" class="form-control form-control-user"
+                <input id="email" type="text" name="email"  class="form-control form-control-user"
                     id="exampleInputEmail" aria-describedby="emailHelp"
                     placeholder="Masukkan Alamat Email..." style="height: 50px;">
             </div>    

@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\Role;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use Carbon\Carbon; 
 
 class AuthController extends Controller
 {
@@ -50,35 +55,61 @@ class AuthController extends Controller
         return redirect('/');
     }
 
-    public function konMail(){
-        return view('konfirmasi-email');
+    public function forgotPassword (){
+        return view('auth.forgotpassword');
     }
 
-    public function konMailLogic(Request $request){
+    public function forgotPasswordProcess(Request $request){
         $request->validate([
-            'email' => 'required'
+            'email' => 'required|email|exists:users',
         ]);
-        $hasil = User::where('email', $request->email)->get();
-        if(isset($hasil[0]->email)){
-            return redirect('/reset-password?email=' . $request->email);
-        }else{
-            return back()->with('gagal', 'Konfirmasi Email Gagal');
+
+        $token =Str::random(64);
+
+        DB::table('password_reset_tokens')->insert([
+            'email' => $request->email,
+            'token' => $token,
+            'created_at' => Carbon::now()
+        ]);
+
+        // Mail::send("email.forgetPassword",['token' => $token], function ($message) use ($request){
+        //     $message->to($request->email);
+        //     $message->subject("Reset Password");
+        // });
+
+        return redirect()->route('reset-forgot-password', $token);
+
+
+    }
+
+    function resetPassword($token){
+        return view('auth.new-password', compact('token'));
+    }
+
+    function resetPasswordPost(Request $request){
+
+        $request->validate([
+            'email' => 'required|email|exists:users',
+            'password' => 'required|string|min:5',
+            'password_confimation' => 'required'
+        ]);
+
+        $updatePassword = DB::table('password_reset_tokens')->where([
+            'email' => $request->email,
+            'token' => $request->token
+        ])->first();
+        
+        if(!$updatePassword){
+            return redirect()->route('reset-password', $token);
         }
-    }
+        $email = $request->email;
+        $password = Hash::make($request->password);
+        DB::update('update users set password = ? where email = ?', [$password, $email]);
+        
+        DB::table('password_reset_tokens')->where(["email" => $request->email])->delete();
 
-    public function resetPass(){
-        $email = request('email');
-        return view('reset-password', compact('email'));
-    }
+        return redirect()->route('login');
 
-    public function resetPassLogic(Request $request){
-        $request->validate([
-            'password' => 'required|same:konfirmasi_password|min:5',
-            'konfirmasi_password' => 'required|same:password|min:5',
-        ]);
-        $password = bcrypt($request->password);
-        User::where('email', $request->email)->update(['password' => $password]);
 
-        return redirect('/login')->with('success', 'Password berhasil dirubah');
     }
 }

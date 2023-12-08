@@ -10,7 +10,7 @@
     
     <div class="col-xl-4 col-md-6 mb-4">
         <div class="card border-left-warning shadow h-100 py-2">
-           <a href="/log_absensi_kelas"> <div class="card-body">
+           <a href="{{route('log_absensi_kelas')}}"> <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text font-weight-bold text-primary text-uppercase mb-1">
@@ -26,7 +26,7 @@
 
     <div class="col-xl-4 col-md-6 mb-4">
         <div class="card border-left-warning shadow h-100 py-2">
-           <a href="/log_absensi_ekskul"> <div class="card-body">
+           <a href="{{route('log_absensi_ekskul')}}"> <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text font-weight-bold text-primary text-uppercase mb-1">
@@ -42,7 +42,7 @@
 
     <div class="col-xl-4 col-md-6 mb-4">
         <div class="card border-left-warning shadow h-100 py-2">
-           <a href="/log_nilai"> <div class="card-body">
+           <a href="{{route('log_nilai')}}"> <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text font-weight-bold text-primary text-uppercase mb-1">
@@ -58,7 +58,7 @@
 
     <div class="col-xl-4 col-md-6 mb-4">
         <div class="card border-left-warning shadow h-100 py-2">
-           <a href="/log_nilai_ekskul"> <div class="card-body">
+           <a href="{{route('log_nilai_ekskul')}}"> <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text font-weight-bold text-primary text-uppercase mb-1">
@@ -74,7 +74,7 @@
 
     <div class="col-xl-4 col-md-6 mb-4">
         <div class="card border-left-warning shadow h-100 py-2">
-           <a href="/log_prestasi"> <div class="card-body">
+           <a href="{{route('log_prestasi')}}"> <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text font-weight-bold text-primary text-uppercase mb-1">
@@ -90,7 +90,7 @@
 
     <div class="col-xl-4 col-md-6 mb-4">
         <div class="card border-left-warning shadow h-100 py-2">
-           <a href="/log_status_kip_kps_pip"> <div class="card-body">
+           <a href="{{route('log_status_kip_kps_pip')}}"> <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text font-weight-bold text-primary text-uppercase mb-1">
@@ -109,7 +109,7 @@
     
      <div class="col-xl-4 col-md-6 mb-4">
         <div class="card border-left-warning shadow h-100 py-2">
-           <a href="/log_roles"> <div class="card-body">
+           <a href="{{route('log_roles')}}"> <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text font-weight-bold text-primary text-uppercase mb-1">
@@ -125,7 +125,7 @@
 
     <div class="col-xl-4 col-md-6 mb-4">
         <div class="card border-left-warning shadow h-100 py-2">
-           <a href="/log_role_assignment"> <div class="card-body">
+           <a href="{{route('log_role_assignment')}}"> <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text font-weight-bold text-primary text-uppercase mb-1">
@@ -141,7 +141,7 @@
 
     <div class="col-xl-4 col-md-6 mb-4">
         <div class="card border-left-warning shadow h-100 py-2">
-           <a href="/log_tata_usaha"> <div class="card-body">
+           <a href="{{route('log_tata_usaha')}}"> <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text font-weight-bold text-primary text-uppercase mb-1">
@@ -157,7 +157,7 @@
 
     <div class="col-xl-4 col-md-6 mb-4">
         <div class="card border-left-warning shadow h-100 py-2">
-           <a href="/log_kepala_sekolah"> <div class="card-body">
+           <a href="{{route('log_kepala_sekolah')}}"> <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text font-weight-bold text-primary text-uppercase mb-1">
@@ -173,7 +173,7 @@
 
     <div class="col-xl-4 col-md-6 mb-4">
         <div class="card border-left-warning shadow h-100 py-2">
-           <a href="/log_siswa"> <div class="card-body">
+           <a href="{{route('log_siswa')}}"> <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text font-weight-bold text-primary text-uppercase mb-1">
@@ -189,7 +189,7 @@
 
     <div class="col-xl-4 col-md-6 mb-4">
         <div class="card border-left-warning shadow h-100 py-2">
-           <a href="/log_guru"> <div class="card-body">
+           <a href="{{route('log_gurusadmin')}}"> <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text font-weight-bold text-primary text-uppercase mb-1">
@@ -206,7 +206,7 @@
 
     <div class="col-xl-4 col-md-6 mb-4">
         <div class="card border-left-warning shadow h-100 py-2">
-           <a href="/log_wali_siswa"> <div class="card-body">
+           <a href="{{route('log_wali_siswa')}}"> <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text font-weight-bold text-primary text-uppercase mb-1">
@@ -222,7 +222,7 @@
 
         <div class="col-xl-4 col-md-6 mb-4">
             <div class="card border-left-warning shadow h-100 py-2">
-               <a href="/log_ekskul_siswa"> <div class="card-body">
+               <a href="{{route('log_ekskul_siswa')}}"> <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text font-weight-bold text-primary text-uppercase mb-1">
@@ -238,7 +238,7 @@
 
             <div class="col-xl-4 col-md-6 mb-4">
                 <div class="card border-left-warning shadow h-100 py-2">
-                   <a href="/log_rapor"> <div class="card-body">
+                   <a href="{{route('log_rapor')}}"> <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text font-weight-bold text-primary text-uppercase mb-1">
@@ -255,7 +255,7 @@
     
     <div class="col-xl-4 col-md-6 mb-4">
         <div class="card border-left-warning shadow h-100 py-2">
-           <a href="/log_kelas"> <div class="card-body">
+           <a href="{{route('log_kelas')}}"> <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text font-weight-bold text-primary text-uppercase mb-1">
@@ -272,7 +272,7 @@
 
 <div class="col-xl-4 col-md-6 mb-4">
     <div class="card border-left-warning shadow h-100 py-2">
-       <a href="/log_ekskul"> <div class="card-body">
+       <a href="{{route('log_ekskul')}}"> <div class="card-body">
             <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
                     <div class="text font-weight-bold text-primary text-uppercase mb-1">
@@ -288,7 +288,7 @@
 
 <div class="col-xl-4 col-md-6 mb-4">
     <div class="card border-left-warning shadow h-100 py-2">
-       <a href="/log_mata_pelajaran"> <div class="card-body">
+       <a href="{{route('log_mata_pelajaran')}}"> <div class="card-body">
             <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
                     <div class="text font-weight-bold text-primary text-uppercase mb-1">
@@ -304,7 +304,7 @@
 
 <div class="col-xl-4 col-md-6 mb-4">
     <div class="card border-left-warning shadow h-100 py-2">
-       <a href="/log_jadwal_mapel"> <div class="card-body">
+       <a href="{{route('log_jadwal_mapel')}}"> <div class="card-body">
             <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
                     <div class="text font-weight-bold text-primary text-uppercase mb-1">

@@ -18,27 +18,27 @@
      <tr>
        <th scope="row">1</th>
        <td>7-A</td>
-       <td><a type="button"  href="/daftarmapel-superadminMP"  class="btn btn-warning">Lihat Mata Pelajaran</a></td>
+       <td><a type="button"  href="{{route('daftarmapel')}}"  class="btn btn-warning">Lihat Mata Pelajaran</a></td>
      </tr>
      <tr>
        <th scope="row">2</th>
        <td>7-B </td>
-       <td><a type="button" href="/daftarmapel-superadminMP"  class="btn btn-warning">Lihat Mata Pelajaran</a></td>
+       <td><a type="button" href="{{route('daftarmapel')}}"  class="btn btn-warning">Lihat Mata Pelajaran</a></td>
      </tr>
      <tr>
        <th scope="row">3</th>
        <td>7-C</td>
-       <th scope="row"><a type="button" href="/daftarmapel-superadminMP" class="btn btn-warning" >Lihat Mata Pelajaran </a></th>
+       <th scope="row"><a type="button" href="{{route('daftarmapel')}}" class="btn btn-warning" >Lihat Mata Pelajaran </a></th>
      </tr>
      <tr>
          <th scope="row">4</th>
          <td>8-A</td>
-         <th scope="row"><a type="button" href="/daftarmapel-superadminMP" class="btn btn-warning" >Lihat Mata Pelajaran </a></th>
+         <th scope="row"><a type="button" href="{{route('daftarmapel')}}" class="btn btn-warning" >Lihat Mata Pelajaran </a></th>
        </tr>
        <tr>
          <th scope="row">5</th>
          <td>8-B</td>
-         <th scope="row"><a type="button" href="/daftarmapel-superadminMP" class="btn btn-warning" >Lihat Mata Pelajaran   </a></th>
+         <th scope="row"><a type="button" href="{{route('daftarmapel')}}" class="btn btn-warning" >Lihat Mata Pelajaran   </a></th>
        </tr>
    </tbody>
  </table>
