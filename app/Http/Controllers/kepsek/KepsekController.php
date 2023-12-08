@@ -13,7 +13,10 @@ class KepsekController extends Controller
     }
 
     public function daftarkelassiswa () {
-        return view('superadmin.manajemenuser.daftarkelassiswa-superadminMU');
+        $kelas = DB::select('SELECT * FROM kelas');
+
+
+        return view('superadmin.manajemenuser.daftarkelassiswa-superadminMU', compact('kelas'));
     }
 
     public function tambahkelas () {

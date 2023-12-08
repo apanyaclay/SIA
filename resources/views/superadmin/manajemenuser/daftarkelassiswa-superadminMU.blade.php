@@ -1,7 +1,7 @@
 @extends('layouts.main_superadmin')
 
 @section('container')
-<div class="edit text-sm-end"><a  type="button" class="btn btn-secondary mt-3 mb-3"  href="/tambahkelas-superadminMU"><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i> Tambah  Kelas</a></div>
+<div class="edit text-sm-end"><a  type="button" class="btn btn-secondary mt-3 mb-3"  href="{{route('tambahkelassadmin')}}"><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i> Tambah  Kelas</a></div>
                                     
 <!-- Page Heading -->
 <h1 class="jadwal h3 mb-0 text-gray-800" style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; text-align: center;"> DAFTAR KELAS</h1>
@@ -21,7 +21,7 @@
         @foreach($kelas as $kelaslist)
         <td>{{ $kelaslist->ID_Kelas }}</td>
         <td>{{ $kelaslist->Nama_Kelas }}</td>
-        <td><a type="button"  href="/listsiswa-superadminMU?kelas_id={{ $kelaslist->ID_Kelas }}"  class="btn btn-warning">Lists Siswa</a></td>
+        <td><a type="button"  href="{{route('listsiswasadmin')}}"  class="btn btn-warning">Lists Siswa</a></td>
        
     </tr>
     @endforeach

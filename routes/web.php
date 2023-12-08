@@ -47,7 +47,7 @@ Route::middleware(['auth'])->group(function () {
         Route::redirect('/', '/superadmin/dashboard');
         Route::get('/dashboard', [KepsekController::class, 'index'])->name('kepsek');
         Route::get('/daftarkelassiswa', [KepsekController::class, 'daftarkelassiswa'])->name('daftarkelassiswasadmin');
-        Route::get('/tambahkelas', [KepsekController::class, 'tambahkelas'])->name('tambahkelas');
+        Route::get('/tambahkelas', [KepsekController::class, 'tambahkelas'])->name('tambahkelassadmin');
         Route::get('/listsiswa', [KepsekController::class, 'listsiswa'])->name('listsiswasadmin');
         Route::get('/tambahsiswa', [KepsekController::class, 'tambahsiswa'])->name('tambahsiswasadmin');
         Route::get('/detailsiswa/{nisn}', [KepsekController::class, 'detailsiswa'])->name('detailsiswasadmin');
