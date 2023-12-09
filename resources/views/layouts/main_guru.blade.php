@@ -20,7 +20,7 @@
         rel="stylesheet">
     <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
 </head>
-
+@include('sweetalert::alert')
 <body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">

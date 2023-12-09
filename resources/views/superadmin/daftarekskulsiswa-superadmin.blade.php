@@ -9,43 +9,25 @@
           <th scope="col">No.</th>
           <th scope="col">NAMA</th>
           <th scope="col">EKSTRAKURIKULER</th>
+          <th scope="col">TAHUN AJARAN</th>
+          <th scope="col">SEMESTER</th>
           <th scope="col">AKSI</th>
         </tr>
       </thead>
       
       <tbody >
+        @foreach ($hasil as $item)
         <tr>
-          <th scope="row">1</th>
-          <td>Maya Sari</td>
-          <td>Menari</td>
-          <td><a type="button" href="" class="btn btn-warning" ><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i></a>
-            <a type="button" href="" class="btn btn-warning" ><i class="fa-solid fa-delete-left" style="color: #ffffff;"></i></a></td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>defef</td>
-          <td>dfeweewx</td>
-          <td><a type="button" href="" class="btn btn-warning" ><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i></a>
-            <a type="button" href="" class="btn btn-warning" ><i class="fa-solid fa-delete-left" style="color: #ffffff;"></i></a></td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>hjyht</td>
-          <td>eewwokd</td>
-          <td><a type="button" href="" class="btn btn-warning" ><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i></a>
-            <a type="button" href="" class="btn btn-warning" ><i class="fa-solid fa-delete-left" style="color: #ffffff;"></i></a></td>
-        </tr>
-        <tr>
-            <th scope="row">4</th> <!--dengan looping-->
-            <td>rfytrutr</td>
-            <td>deryrygr</td>
-            <td><a type="button" href="" class="btn btn-warning" ><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i></a>
-                <a type="button" href="" class="btn btn-warning" ><i class="fa-solid fa-delete-left" style="color: #ffffff;"></i></a></td>
-        </tr>
+          <th scope="row">{{$item->ID_Ekskul_Siswa}}</th>
+          <td>{{$item->Nama_Siswa}}</td>
+          <td>{{$item->Nama_Ekskul}}</td>
+          <td>{{$item->Thn_Ajaran}}</td>
+          <td>{{$item->Semester}}</td>
+          <td><a type="button" href="{{url('superadmin/editekskulsiswa', $item->ID_Ekskul_Siswa)}}" class="btn btn-warning" ><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i></a>
+          </tr>
+          @endforeach
       </tbody>
     </table>
     </div> 
-            
-
 
 @endsection

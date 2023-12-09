@@ -10,7 +10,7 @@
           <!-- <input style="width: 400px; ;" class="form-control me-2" type="search" placeholder="Search an Airport" aria-label="Search"> -->
           {{-- <a href="/login" style="background-color: #f8af7b; font-weight: bolder;" class="btn btn-outline-success mx-3">M A S U K</a> --}}
 
-        
+          @include('sweetalert::alert')
         </form>
       </div>
     </nav>

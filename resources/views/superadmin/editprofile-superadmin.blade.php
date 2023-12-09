@@ -1,5 +1,5 @@
 @extends('layouts.main_superadmin')
-
+@include('sweetalert::alert')
 @section('container')
           <!-- Page Heading -->
           <div class="isi ">
@@ -7,41 +7,44 @@
                            
             <div class="informasi py-3 px-3">
               
-               <form action="" method="">
-                   <table class="table  mt-4">      
-                  <tr>
+               <form action="{{route('editprofilePost')}}" method="POST">
+                @csrf
+                   <table class="table  mt-4">
+                            @foreach ($kepala_sekolah as $item)
+                            <tr>
+                                <th>NUPTK</th>
+                                <td><input type="text" name="nuptk" value="{{$item->ID_Kepsek}}" readonly></td>
+                            </tr>
+                            <tr>
                                <th>Nama</th>
-                               <td><input type="text" name="nama" value="Kairi rayosdelsol"></td>
+                               <td><input type="text" name="nama" value="{{$item->Nama_Kepsek}}"></td>
                            </tr>                 
                            <tr>
-                               <th>NUPTK</th>
-                               <td><input type="text" name="NUPTK" value="Perempuan"></td>
-                           </tr>
-                           <tr>
                                <th>Jenis Kelamin</th>
-                               <td><input type="text" name="jenis_kelamin" value="Laki-laki"></td>
+                               <td><input type="text" name="jenis_kelamin" value="{{$item->Jenis_Kelamin}}"></td>
                            </tr>               
                            <tr>
                                <th>TMT Kerja</th>
-                               <td><input type="text" name="tmt_kerja" value="jreihnwnlg"></td>
+                               <td><input type="text" name="tmt_kerja" value="{{$item->TMT_Kerja}}"></td>
                            </tr>
                            <tr>
                                <th>Tempat Lahir</th>
-                               <td><input type="text" name="tempat_kerja" value="jreihnwnlg"></td>
+                               <td><input type="text" name="tempat_lahir" value="{{$item->Tempat_Lahir}}"></td>
                            </tr>
                            <tr>
                                <th>Tanggal Lahir</th>
-                               <td><input type="date" name="tanggal_lahir" value="12-12-1995"></td>
+                               <td><input type="date" name="tanggal_lahir" value="{{$item->Tanggal_Lahir}}"></td>
                            </tr>
                            <tr>
                                <th>Jenjang Pendidikan</th>
-                               <td><input type="text" name="tmt_kerja" value="S-1"></td>
+                               <td><input type="text" name="jenjang_pendidikan" value="{{$item->Jenjang_Pendidikan}}"></td>
                            </tr><tr>
                                <th>Status</th>
-                               <td><input type="text" name="tmt_kerja" value="aktif"></td>
+                               <td><input type="text" name="status" value="{{$item->Status}}"></td>
                            </tr>
-             </table>
-             <button type="submit" class="btn btn-warning">Simpan Perubahan</button>
+                            @endforeach
+                    </table>
+                    <button type="submit" class="btn btn-warning">Simpan Perubahan</button>
                </form>
            
               

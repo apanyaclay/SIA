@@ -26,8 +26,8 @@
              <td>{{ $ekskul->Hari }}</td>
              <td>{{ $ekskul->Waktu_Mulai }}</td>
              <td>{{ $ekskul->Waktu_Selesai }}</td>
-             <td><a type="button" href="" class="btn btn-warning" ><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i></a>
-              <a type="button" href="" class="btn btn-warning" ><i class="fa-solid fa-delete-left" style="color: #ffffff;"></i></a></td>
+             <td><a type="button" href="{{url('superadmin/editekskul', $ekskul->Kode_Ekskul)}}" class="btn btn-warning" ><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i></a>
+              <a type="button" href="" class="btn btn-warning"  data-bs-toggle="modal" data-bs-target="#exampleModal" data-ekskulid="{{ $ekskul->Kode_Ekskul }}"><i class="fa-solid fa-delete-left" style="color: #ffffff;"></i></a></td>
              
              
             </tr> 
@@ -36,5 +36,37 @@
        </tbody>
      </table>
      </div> 
+     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Daftar Ekstrakurikuler</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Apakah Anda Yakin Ingin Menghapus ?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-warning" id="hapusButton" data-bs-dismiss="modal">Hapus</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+    <script>
+        $(document).ready(function() {
+            // Menangkap ID ekstrakurikuler saat tombol hapus diklik
+            $('.btn-warning[data-bs-target="#exampleModal"]').click(function() {
+                var ekskulId = $(this).data('ekskulid');
+                $('#hapusButton').attr('data-ekskulid', ekskulId);
+            });
+    
+            // Mengirimkan permintaan hapus ketika tombol Hapus diklik di dalam modal
+            $('#hapusButton').click(function() {
+                var ekskulId = $(this).data('ekskulid');
+                window.location.href = '/superadmin/deleteekskul/' + ekskulId;
+            });
+        });
+    </script>
 @endsection

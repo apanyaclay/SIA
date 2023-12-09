@@ -35,5 +35,5 @@
         </div>
       </div>
        <div class="copyright"> Copyright@2023 Kelompok 3 Manajemen Sistem Basis Data Kom C'22</div>
-
+       @include('sweetalert::alert')
 </footer>

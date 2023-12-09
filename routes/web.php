@@ -6,6 +6,8 @@ use App\Http\Controllers\siswa\SiswaController;
 use App\Http\Controllers\guru\GuruController;
 use App\Http\Controllers\tatausaha\TatausahaController;
 use App\Http\Controllers\kepsek\KepsekController;
+use App\Http\Controllers\kepsek\ProfileController;
+use App\Http\Controllers\kepsek\EkskulController;
 use App\Http\Controllers\LogController;
 
 /*
@@ -48,32 +50,55 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', [KepsekController::class, 'index'])->name('kepsek');
         Route::get('/daftarkelassiswa', [KepsekController::class, 'daftarkelassiswa'])->name('daftarkelassiswasadmin');
         Route::get('/tambahkelas', [KepsekController::class, 'tambahkelas'])->name('tambahkelassadmin');
-        Route::get('/listsiswa', [KepsekController::class, 'listsiswa'])->name('listsiswasadmin');
+        Route::post('/tambahkelas', [KepsekController::class, 'tambahkelasPost'])->name('tambahkelassadminPost');
+        Route::get('/listsiswa/{kode}', [KepsekController::class, 'listsiswa'])->name('listsiswasadmin');
+        Route::post('/ubahstatus/{kode}', [KepsekController::class, 'ubahstatus'])->name('ubahstatus');
         Route::get('/tambahsiswa', [KepsekController::class, 'tambahsiswa'])->name('tambahsiswasadmin');
+        Route::post('/tambahsiswa', [KepsekController::class, 'tambahsiswaPost'])->name('tambahsiswasadminPost');
+        Route::get('/editsiswa/{kode}', [KepsekController::class, 'editsiswa'])->name('editsiswa');
+        Route::post('/editsiswa', [KepsekController::class, 'editsiswaPost'])->name('editsiswaPost');
+        Route::get('/deletesiswa/{kode}', [KepsekController::class, 'deletesiswa'])->name('deletesiswa');
         Route::get('/detailsiswa/{nisn}', [KepsekController::class, 'detailsiswa'])->name('detailsiswasadmin');
         Route::get('/daftarptk', [KepsekController::class, 'daftarptk'])->name('daftarptksadmin');
         Route::get('/tambahptk', [KepsekController::class, 'tambahptk'])->name('tambahptk');
-        Route::get('/detailptk', [KepsekController::class, 'detailptk'])->name('detailptksadmin');
+        Route::post('/tambahptk', [KepsekController::class, 'tambahptkPost'])->name('tambahptkPost');
+        Route::get('/detailptk/{kode}', [KepsekController::class, 'detailptk'])->name('detailptksadmin');
+        Route::get('/deletetu/{kode}', [KepsekController::class, 'deletetu'])->name('deletetu');
         Route::get('/daftartu', [KepsekController::class, 'daftartu'])->name('daftartusadmin');
         Route::get('/tambahtu', [KepsekController::class, 'tambahtu'])->name('tambahtu');
-        Route::get('/detailtu', [KepsekController::class, 'detailtu'])->name('detailtusadmin');
+        Route::post('/tambahtu', [KepsekController::class, 'tambahtuPost'])->name('tambahtuPost');
+        Route::get('/detailtu/{kode}', [KepsekController::class, 'detailtu'])->name('detailtusadmin');
+        Route::get('/deleteptk/{kode}', [KepsekController::class, 'deleteptk'])->name('deleteptk');
         Route::get('/listraporsiswa', [KepsekController::class, 'listraporsiswa'])->name('listraporsiswasadmin');
         Route::get('/listsiswaNS', [KepsekController::class, 'listsiswaNS'])->name('listsiswaNS');
         Route::get('/editraporsiswa', [KepsekController::class, 'editraporsiswa'])->name('editraporsiswa');
         Route::get('/daftarkelasMP', [KepsekController::class, 'daftarkelasMP'])->name('daftarkelasMP');
-        Route::get('/daftarmapel', [KepsekController::class, 'daftarmapel'])->name('daftarmapel');
+        Route::get('/daftarmapel/{kode}', [KepsekController::class, 'daftarmapel'])->name('daftarmapel');
         Route::get('/tambahmapel', [KepsekController::class, 'tambahmapel'])->name('tambahmapel');
+        Route::post('/tambahmapel', [KepsekController::class, 'tambahmapelPost'])->name('tambahmapelPost');
+        Route::get('/deletemapel/{kode}', [KepsekController::class, 'deletemapel'])->name('deletemapel');
         Route::get('/daftarkelasJS', [KepsekController::class, 'daftarkelasJS'])->name('daftarkelasJS');
-        Route::get('/jadwalsiswa', [KepsekController::class, 'jadwalsiswa'])->name('jadwalsiswasadmin');
+        Route::get('/jadwalsiswa/{kode}', [KepsekController::class, 'jadwalsiswa'])->name('jadwalsiswasadmin');
         Route::get('/daftarkelas', [KepsekController::class, 'daftarkelasVR'])->name('daftarkelasVR');
-        Route::get('/listsiswaVR', [KepsekController::class, 'listsiswaVR'])->name('listsiswaVR');
+        Route::get('/listsiswaVR/{kode}', [KepsekController::class, 'listsiswaVR'])->name('listsiswaVR');
         Route::get('/raporsiswa', [KepsekController::class, 'raporsiswa'])->name('raporsiswasadmin');
-        Route::get('/daftarekskul', [KepsekController::class, 'daftarekskul'])->name('daftarekskulsadmin');
-        Route::get('/tambahekskul', [KepsekController::class, 'tambahekskul'])->name('tambahekskulsadmin');
-        Route::get('/daftarekskulsiswa', [KepsekController::class, 'daftarekskulsiswa'])->name('daftarekskulsiswasadmin');
+        //Ekskul
+        Route::get('/daftarekskul', [EkskulController::class, 'daftarekskul'])->name('daftarekskulsadmin');
+        Route::get('/tambahekskul', [EkskulController::class, 'tambahekskul'])->name('tambahekskulsadmin');
+        Route::post('/tambahekskul', [EkskulController::class, 'tambahekskulPost'])->name('tambahekskulPost');
+        Route::get('/editekskul/{kode}', [EkskulController::class, 'editekskul'])->name('editekskulsadmin');
+        Route::post('/editekskul', [EkskulController::class, 'editekskulPost'])->name('editekskulPost');
+        Route::get('/deleteekskul/{kode}', [EkskulController::class, 'deleteekskul'])->name('deleteekskul');
+        //Ekskul Siswa
+        Route::get('/daftarekskulsiswa', [EkskulController::class, 'daftarekskulsiswa'])->name('daftarekskulsiswasadmin');
+        Route::get('/editekskulsiswa/{kode}', [EkskulController::class, 'editekskulsiswa'])->name('editekskulsiswasadmin');
+        Route::post('/editekskulsiswa', [EkskulController::class, 'editekskulsiswaPost'])->name('editekskulsiswaPost');
+        Route::get('/deleteekskulsiswa/{kode}', [EkskulController::class, 'deleteekskulsiswa'])->name('deleteekskulsiswa');
+
         Route::get('/audit', [KepsekController::class, 'audit'])->name('auditsadmin');
-        Route::get('/profile', [KepsekController::class, 'profile'])->name('profilesadmin');
-        Route::get('/editprofile', [KepsekController::class, 'editprofile'])->name('editprofilesadmin');
+        Route::get('/profile', [ProfileController::class, 'profile'])->name('profilesadmin');
+        Route::get('/editprofile', [ProfileController::class, 'editprofile'])->name('editprofilesadmin');
+        Route::post('/editprofile', [ProfileController::class, 'editprofilePost'])->name('editprofilePost');
         //Log
         Route::get('/log_absensi_ekskul', [LogController::class, 'index'])->name('log_absensi_ekskul');
         Route::get('/log_absensi_kelas', [LogController::class, 'absen_kelas'])->name('log_absensi_kelas');

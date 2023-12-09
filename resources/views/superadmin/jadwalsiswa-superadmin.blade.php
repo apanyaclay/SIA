@@ -2,8 +2,8 @@
 
 @section('container')
               <!-- Page Heading -->
-              <div class="isi ">
-                <h1 class="jadwal h3 mb-0 text-gray-800" style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; text-align: center;"> JADWAL KELAS (X) TAHUN AJARAN (X)</h1></div>
+              <div class="isi ">s
+                <h1 class="jadwal h3 mb-0 text-gray-800" style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; text-align: center;"> JADWAL {{$kelas[0]->Nama_Kelas}}</h1></div>
                                        
                 <table class="table text-center table-bordered  mt-4">
                        <thead style="background-color: #748E63; color: #000;">
@@ -18,16 +18,18 @@
                          </tr>
                        </thead>
                        <tbody class="table-group-divider table-warning">
-                         <tr>
-                           <th>12.00 - 13.00</th>
-                           <td>MTK</td>
-                           <td>MTK</td>
-                           <td>MTK</td>
-                           <td>MTK</td>
-                           <td>MTK</td>
-                           <td>MTK</td>
-                         </tr>
-                         <tr>
+                        @for ($i = 0; $i < count($senin); $i++)
+                        <tr>
+                          <th>{{$jam[$i]->Waktu_Mulai}} - {{$jam[$i]->Waktu_Selesai }}</th>
+                          <td>{{$senin[$i]->Nama_Mapel}}</td>
+                          <td>{{$selasa[$i]->Nama_Mapel}}</td>
+                          <td>{{$rabu[$i]->Nama_Mapel}}</td>
+                          <td>{{$kamis[$i]->Nama_Mapel}}</td>
+                          <td>{{$jumat[$i]->Nama_Mapel}}</td>
+                          <td>{{$sabtu[$i]->Nama_Mapel}}</td>
+                        </tr>
+                        @endfor
+                         {{-- <tr>
                            <th>12.00 - 13.00</th>
                            <td>MTK</td>
                            <td>MTK</td>
@@ -80,7 +82,7 @@
                                <td>MTK</td>
                                <td>MTK</td>
                                <td>MTK</td>
-                             </tr>
+                             </tr> --}}
                
                        </tbody>
                </table>

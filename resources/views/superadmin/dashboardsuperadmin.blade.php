@@ -23,9 +23,11 @@
                                         <div>Status </div>
                                     </div>
                                     <div class="col-8">
-                                        <div>SYAFRIZAL</div>
-                                        <div>1</div>
-                                        <div>Aktif</div>
+                                      @foreach ($data as $item)
+                                      <div>{{$item->Nama_Kepsek}}</div>
+                                      <div>{{$item->ID_Kepsek}}</div>
+                                      <div>{{$item->Status}}</div>
+                                      @endforeach
                                     </div>
                                   </div>
                                 </div>

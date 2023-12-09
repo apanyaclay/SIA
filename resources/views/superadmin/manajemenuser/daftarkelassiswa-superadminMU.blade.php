@@ -10,7 +10,7 @@
 <table  class="table text-center table-bordered  mt-4"style="width:900px ;" >
 <thead style="background-color: #748E63; color: #000;" >
 <tr>
-<th scope="col">NO.</th>
+<th scope="col">KODE KELAS</th>
 <th scope="col">KELAS</th>
 <th scope="col">DETAIL</th>
 </tr>
@@ -21,7 +21,7 @@
         @foreach($kelas as $kelaslist)
         <td>{{ $kelaslist->ID_Kelas }}</td>
         <td>{{ $kelaslist->Nama_Kelas }}</td>
-        <td><a type="button"  href="{{route('listsiswasadmin')}}"  class="btn btn-warning">Lists Siswa</a></td>
+        <td><a type="button"  href="{{url('superadmin/listsiswa', $kelaslist->ID_Kelas )}}"  class="btn btn-warning">Lists Siswa</a></td>
        
     </tr>
     @endforeach
