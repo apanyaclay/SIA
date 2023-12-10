@@ -17,12 +17,8 @@ class CekRole
      */
     public function handle(Request $request, Closure $next, ...$roles)
     {
-        // Check apakah pengguna sudah login
         if (Auth::check()) {
-            // Ambil peran pengguna
-            $user = Role::where('Email', Auth::user()->email)->first();
-            if ($user) {
-                $userRole = $user->Nama_Role;
+                $userRole = Auth::user()->role;
                 // Cek apakah peran pengguna termasuk dalam roles yang diizinkan
                 if (in_array($userRole, $roles)) {
                     return $next($request);
@@ -38,9 +34,6 @@ class CekRole
                             return redirect()->route('tatausaha');
                     }
                 }
-            } else {
-                return redirect('/');
-            }
         } else {
             // Jika peran tidak diizinkan, redirect ke halaman yang sesuai atau tampilkan pesan error
             return redirect('/');
