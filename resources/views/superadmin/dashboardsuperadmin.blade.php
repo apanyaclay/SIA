@@ -19,7 +19,7 @@
                                   <div class="row">
                                     <div class="col-4" style="font-weight: bolder;">
                                         <div>NAMA</div>
-                                        <div>NUPTK</div>
+                                        <div>NUPTK {{Auth::User()->role}}</div>
                                         <div>Status </div>
                                     </div>
                                     <div class="col-8">

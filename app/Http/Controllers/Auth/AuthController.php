@@ -27,10 +27,11 @@ class AuthController extends Controller
     
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
-            $user = Role::where('Email', $request->email)->first();
+            // $user = Role::where('Email', $request->email)->first();
+            $user = User::where('email', $request->email)->first();
 
             if($user){
-                $userRole = $user->Nama_Role;
+                $userRole = $user->role;
                 
             switch ($userRole) {
                 case 'Kepala Sekolah':
