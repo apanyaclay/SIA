@@ -101,7 +101,7 @@ class AuthController extends Controller
         ])->first();
         
         if(!$updatePassword){
-            return redirect()->route('reset-password', $token);
+            return redirect()->route('reset-password', $request->token);
         }
         $email = $request->email;
         $password = Hash::make($request->password);

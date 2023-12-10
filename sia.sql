@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2023 at 09:46 AM
+-- Generation Time: Dec 10, 2023 at 03:28 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -21,6 +21,22 @@ SET time_zone = "+00:00";
 -- Database: `sia`
 --
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `absensi_ekskuls`
+--
+
+CREATE TABLE `absensi_ekskuls` (
+  `ID_Absensi` int(11) NOT NULL,
+  `ID_Ekskul_Siswa` varchar(10) NOT NULL,
+  `Tanggal` date NOT NULL,
+  `Hadir` int(11) NOT NULL,
+  `Izin` int(11) NOT NULL,
+  `Alpa` int(11) NOT NULL,
+  `Sakit` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 --
 -- Dumping data for table `absensi_ekskuls`
 --
@@ -28,6 +44,23 @@ SET time_zone = "+00:00";
 INSERT INTO `absensi_ekskuls` (`ID_Absensi`, `ID_Ekskul_Siswa`, `Tanggal`, `Hadir`, `Izin`, `Alpa`, `Sakit`) VALUES
 (1, 'PRK001', '2023-11-06', 10, 2, 3, 2),
 (2, 'MNR001', '2023-11-09', 20, 7, 2, 8);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `absensi_kelas`
+--
+
+CREATE TABLE `absensi_kelas` (
+  `ID_Absensi` int(11) NOT NULL,
+  `Siswa_ID` int(11) NOT NULL,
+  `Kelas` varchar(10) NOT NULL,
+  `Tanggal` date NOT NULL,
+  `Hadir` int(11) NOT NULL,
+  `Izin` int(11) NOT NULL,
+  `Alpa` int(11) NOT NULL,
+  `Sakit` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `absensi_kelas`
@@ -51,6 +84,19 @@ INSERT INTO `absensi_kelas` (`ID_Absensi`, `Siswa_ID`, `Kelas`, `Tanggal`, `Hadi
 (19, 117795632, 'SMP8A', '2023-12-14', 1, 0, 0, 0),
 (20, 117795632, 'SMP8A', '2023-12-15', 0, 0, 1, 0);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ekskul_siswas`
+--
+
+CREATE TABLE `ekskul_siswas` (
+  `ID_Ekskul_Siswa` varchar(10) NOT NULL,
+  `Ekskul_Kode` char(5) NOT NULL,
+  `Siswa_ID` int(11) NOT NULL,
+  `Thn_Ajaran` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 --
 -- Dumping data for table `ekskul_siswas`
 --
@@ -60,6 +106,21 @@ INSERT INTO `ekskul_siswas` (`ID_Ekskul_Siswa`, `Ekskul_Kode`, `Siswa_ID`, `Thn_
 ('PRK001', 'PRK', 117795632, 1),
 ('PRK002', 'MNYI', 91676040, 4),
 ('PST001', 'PST', 91676040, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ekstrakurikulers`
+--
+
+CREATE TABLE `ekstrakurikulers` (
+  `Kode_Ekskul` char(5) NOT NULL,
+  `Nama_Ekskul` varchar(30) NOT NULL,
+  `Guru_Ekskul` bigint(20) NOT NULL,
+  `Hari` enum('Senin','Selasa','Rabu','Kamis','Jumat','Sabtu') NOT NULL,
+  `Waktu_Mulai` time NOT NULL,
+  `Waktu_Selesai` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `ekstrakurikulers`
@@ -71,6 +132,27 @@ INSERT INTO `ekstrakurikulers` (`Kode_Ekskul`, `Nama_Ekskul`, `Guru_Ekskul`, `Ha
 ('MNYI', 'MENYANYI', 7545772673130023, 'Rabu', '15:00:00', '16:00:00'),
 ('PRK', 'FUTSAL', 1148770671130093, 'Senin', '15:15:00', '16:16:00'),
 ('PST', 'Pencak Silat', 2344763664110023, 'Sabtu', '14:00:00', '17:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `guruses`
+--
+
+CREATE TABLE `guruses` (
+  `NUPTK` bigint(20) NOT NULL,
+  `NIP` varchar(18) NOT NULL,
+  `Nama_Guru` varchar(150) NOT NULL,
+  `Jenis_Kelamin` enum('L','P') NOT NULL,
+  `Tempat_Lahir` varchar(100) NOT NULL,
+  `Tanggal_Lahir` date NOT NULL,
+  `Status_Kepegawaian` enum('GTY/PTY','Guru Honor') NOT NULL,
+  `Jenis_PTK` enum('Guru Mapel','Guru Wali Kelas') NOT NULL,
+  `Jenjang_Pendidikan` varchar(100) NOT NULL,
+  `TMT_Kerja` date NOT NULL,
+  `JJM` int(11) DEFAULT NULL,
+  `Status` enum('Aktif','Resign','Diberhentikan','Cuti') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `guruses`
@@ -87,6 +169,22 @@ INSERT INTO `guruses` (`NUPTK`, `NIP`, `Nama_Guru`, `Jenis_Kelamin`, `Tempat_Lah
 (9261764666210083, '1219054901020008', 'WINASTRI', 'P', 'HELVETIA', '1986-09-29', 'GTY/PTY', 'Guru Wali Kelas', 'S1 - PENDIDIKAN SENI BUDAYA', '2009-07-17', 4, 'Aktif'),
 (9736764665230312, '1213034404860005', 'Nursakinah', 'P', 'Hutarimbaru', '1986-04-04', 'GTY/PTY', 'Guru Wali Kelas', 'S1-Ilmu Pengetahuan Sosial', '2017-07-18', 24, 'Cuti'),
 (125298476722301635, '1219054404930002', 'SHAFIRA HILMI WAHYUDI', 'P', 'MEDAN', '1998-06-03', 'GTY/PTY', 'Guru Mapel', 'SMA/SEDERAJAT', '2020-07-13', 18, 'Aktif');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jadwal_mapels`
+--
+
+CREATE TABLE `jadwal_mapels` (
+  `ID_Jadwal` varchar(10) NOT NULL,
+  `Kelas_ID` varchar(10) NOT NULL,
+  `Kode_Mapel` char(5) NOT NULL,
+  `Thn_Ajaran_ID` bigint(20) NOT NULL,
+  `Waktu_Mulai` time NOT NULL,
+  `Waktu_Selesai` time NOT NULL,
+  `Hari` enum('Senin','Selasa','Rabu','Kamis','Jumat','Sabtu') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `jadwal_mapels`
@@ -112,6 +210,20 @@ INSERT INTO `jadwal_mapels` (`ID_Jadwal`, `Kelas_ID`, `Kode_Mapel`, `Thn_Ajaran_
 ('8', 'SMP8A', 'BING', 2, '10:00:00', '11:00:00', 'Selasa'),
 ('9', 'SMP8A', 'BING', 2, '10:00:00', '11:00:00', 'Rabu');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kelas`
+--
+
+CREATE TABLE `kelas` (
+  `ID_Kelas` varchar(10) NOT NULL,
+  `Wali_Kelas` bigint(20) NOT NULL,
+  `Nama_Kelas` varchar(150) NOT NULL,
+  `Tingkatan` enum('7','8','9') NOT NULL,
+  `Kelompok_Kelas` enum('A','B','C','D','E') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 --
 -- Dumping data for table `kelas`
 --
@@ -122,14 +234,49 @@ INSERT INTO `kelas` (`ID_Kelas`, `Wali_Kelas`, `Nama_Kelas`, `Tingkatan`, `Kelom
 ('SMP9A', 8450774675230033, 'Kelas 9-1', '9', 'A'),
 ('SMP9B', 9261764666210083, 'Kelas 9-2', '9', 'B'),
 ('TJH34', 7545772673130023, 'Kelas 7-1', '7', 'A'),
-('TJH35', 5853776677230002, 'Kelas 7-2', '7', 'B');
+('TJH35', 5853776677230002, 'Kelas 7-2', '7', 'B'),
+('TTT', 1252771672230163, 'Kelas Test', '9', 'C');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kepala_sekolahs`
+--
+
+CREATE TABLE `kepala_sekolahs` (
+  `ID_Kepsek` bigint(20) NOT NULL,
+  `Nama_Kepsek` varchar(150) NOT NULL,
+  `Jenjang_Pendidikan` varchar(100) NOT NULL,
+  `Jenis_Kelamin` enum('L','P') NOT NULL,
+  `Tempat_Lahir` varchar(100) NOT NULL,
+  `Tanggal_Lahir` date NOT NULL,
+  `TMT_Kerja` date NOT NULL,
+  `Status` enum('Aktif','Resign','Diberhentikan','Cuti') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `kepala_sekolahs`
 --
 
 INSERT INTO `kepala_sekolahs` (`ID_Kepsek`, `Nama_Kepsek`, `Jenjang_Pendidikan`, `Jenis_Kelamin`, `Tempat_Lahir`, `Tanggal_Lahir`, `TMT_Kerja`, `Status`) VALUES
-(1, 'SYAFRIZAL HAMZA', 'S-1 EKONOMI', 'L', 'MEDAN DENAI', '1993-06-17', '2016-07-18', 'Aktif');
+(1, 'SYAFRIZAL', 'S-1 EKONOMI', 'L', 'MEDAN DENAI', '1993-06-17', '2016-07-18', 'Aktif');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kip_kps_pips`
+--
+
+CREATE TABLE `kip_kps_pips` (
+  `ID_Status` int(11) NOT NULL,
+  `ID_Siswa` int(11) NOT NULL,
+  `Status_KIP` enum('ya','tidak') NOT NULL,
+  `No_KIP` varchar(30) NOT NULL,
+  `Status_KPS` enum('ya','tidak') NOT NULL,
+  `No_KPS` varchar(30) NOT NULL,
+  `Status_Eligible_PIP` enum('ya','tidak') NOT NULL,
+  `Alasan_Eligible_PIP` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `kip_kps_pips`
@@ -138,6 +285,214 @@ INSERT INTO `kepala_sekolahs` (`ID_Kepsek`, `Nama_Kepsek`, `Jenjang_Pendidikan`,
 INSERT INTO `kip_kps_pips` (`ID_Status`, `ID_Siswa`, `Status_KIP`, `No_KIP`, `Status_KPS`, `No_KPS`, `Status_Eligible_PIP`, `Alasan_Eligible_PIP`) VALUES
 (1, 78791950, 'ya', '120008374', 'ya', '8362773673', 'tidak', ''),
 (2, 109600822, 'ya', '3472748934', 'tidak', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_absensi_ekskuls`
+--
+
+CREATE TABLE `log_absensi_ekskuls` (
+  `ID_Absensi` int(11) NOT NULL,
+  `ID_Ekskul_Siswa` varchar(10) NOT NULL,
+  `Tanggal` date NOT NULL,
+  `Hadir` int(11) NOT NULL,
+  `Izin` int(11) NOT NULL,
+  `Alpa` int(11) NOT NULL,
+  `Sakit` int(11) NOT NULL,
+  `Action` varchar(6) NOT NULL,
+  `Username` varchar(100) NOT NULL,
+  `Waktu` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_absensi_kelas`
+--
+
+CREATE TABLE `log_absensi_kelas` (
+  `ID_Absensi` int(11) NOT NULL,
+  `Siswa_ID` int(11) NOT NULL,
+  `Kelas` varchar(10) NOT NULL,
+  `Tanggal` date NOT NULL,
+  `Hadir` int(11) NOT NULL,
+  `Izin` int(11) NOT NULL,
+  `Alpa` int(11) NOT NULL,
+  `Sakit` int(11) NOT NULL,
+  `Action` varchar(6) NOT NULL,
+  `Username` varchar(100) NOT NULL,
+  `Waktu` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_ekskul_siswas`
+--
+
+CREATE TABLE `log_ekskul_siswas` (
+  `ID_Ekskul_Siswa` varchar(10) NOT NULL,
+  `Ekskul_Kode` char(5) NOT NULL,
+  `Siswa_ID` int(11) NOT NULL,
+  `Thn_Ajaran` bigint(20) NOT NULL,
+  `Action` varchar(6) NOT NULL,
+  `Username` varchar(100) NOT NULL,
+  `Waktu` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_ekstrakurikulers`
+--
+
+CREATE TABLE `log_ekstrakurikulers` (
+  `Kode_Ekskul` char(5) NOT NULL,
+  `Nama_Ekskul` varchar(30) NOT NULL,
+  `Guru_Ekskul` bigint(20) NOT NULL,
+  `Hari` enum('Senin','Selasa','Rabu','Kamis','Jumat','Sabtu') NOT NULL,
+  `Waktu_Mulai` time NOT NULL,
+  `Waktu_Selesai` time NOT NULL,
+  `Action` varchar(6) NOT NULL,
+  `Username` varchar(100) NOT NULL,
+  `Waktu` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_gurus`
+--
+
+CREATE TABLE `log_gurus` (
+  `NUPTK` bigint(20) NOT NULL,
+  `NIP` varchar(18) NOT NULL,
+  `Nama_Guru` varchar(150) NOT NULL,
+  `Jenis_Kelamin` enum('L','P') NOT NULL,
+  `Tempat_Lahir` varchar(100) NOT NULL,
+  `Tanggal_Lahir` date NOT NULL,
+  `Status_Kepegawaian` enum('GTY/PTY','Guru Honor') NOT NULL,
+  `Jenis_PTK` enum('Guru Mapel','Guru Wali Kelas') NOT NULL,
+  `Jenjang_Pendidikan` varchar(100) NOT NULL,
+  `TMT_Kerja` date NOT NULL,
+  `JJM` int(11) NOT NULL,
+  `Status` enum('Aktif','Resign','Diberhentikan','Cuti') NOT NULL,
+  `Action` varchar(6) NOT NULL,
+  `Username` varchar(100) NOT NULL,
+  `Waktu` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_jadwal_mapels`
+--
+
+CREATE TABLE `log_jadwal_mapels` (
+  `ID_Jadwal` varchar(10) NOT NULL,
+  `Kelas_ID` varchar(10) NOT NULL,
+  `Kode_Mapel` char(5) NOT NULL,
+  `Thn_Ajaran_ID` bigint(20) NOT NULL,
+  `Waktu_Mulai` time NOT NULL,
+  `Waktu_Selesai` time NOT NULL,
+  `Hari` enum('Senin','Selasa','Rabu','Kamis','Jumat','Sabtu') NOT NULL,
+  `Action` varchar(6) NOT NULL,
+  `Username` varchar(100) NOT NULL,
+  `Waktu` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_kelas`
+--
+
+CREATE TABLE `log_kelas` (
+  `ID_Kelas` varchar(10) NOT NULL,
+  `Wali_Kelas` bigint(20) NOT NULL,
+  `Nama_Kelas` varchar(150) NOT NULL,
+  `Tingkatan` enum('7','8','9') NOT NULL,
+  `Kelompok_Kelas` enum('A','B','C','D','E') NOT NULL,
+  `Action` varchar(6) NOT NULL,
+  `Username` varchar(100) NOT NULL,
+  `Waktu` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_kepala_sekolahs`
+--
+
+CREATE TABLE `log_kepala_sekolahs` (
+  `ID_Kepsek` bigint(20) NOT NULL,
+  `Nama_Kepsek` varchar(150) NOT NULL,
+  `Jenjang_Pendidikan` varchar(100) NOT NULL,
+  `Jenis_Kelamin` enum('L','P') NOT NULL,
+  `Tempat_Lahir` varchar(100) NOT NULL,
+  `Tanggal_Lahir` date NOT NULL,
+  `TMT_Kerja` date NOT NULL,
+  `Status` enum('Aktif','Resign','Diberhentikan','Cuti') NOT NULL,
+  `Action` varchar(6) NOT NULL,
+  `Username` varchar(100) NOT NULL,
+  `Waktu` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_kip_kps_pips`
+--
+
+CREATE TABLE `log_kip_kps_pips` (
+  `ID_Status` int(11) NOT NULL,
+  `ID_Siswa` int(11) NOT NULL,
+  `Status_KIP` enum('ya','tidak') NOT NULL,
+  `No_KIP` varchar(30) NOT NULL,
+  `Status_KPS` enum('ya','tidak') NOT NULL,
+  `No_KPS` varchar(30) NOT NULL,
+  `Status_Eligible_PIP` enum('ya','tidak') NOT NULL,
+  `Alasan_Eligible_PIP` varchar(50) NOT NULL,
+  `Action` varchar(6) NOT NULL,
+  `Username` varchar(100) NOT NULL,
+  `Waktu` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_mata_pelajarans`
+--
+
+CREATE TABLE `log_mata_pelajarans` (
+  `Kode_Mapel` char(5) NOT NULL,
+  `Nama_Mapel` varchar(50) NOT NULL,
+  `KKM` int(11) NOT NULL,
+  `Guru_Mapel` bigint(20) NOT NULL,
+  `Action` varchar(6) NOT NULL,
+  `Username` varchar(100) NOT NULL,
+  `Waktu` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_nilais`
+--
+
+CREATE TABLE `log_nilais` (
+  `Nilai_ID` int(11) NOT NULL,
+  `Kode_Mapel` char(5) NOT NULL,
+  `Siswa_ID` int(11) NOT NULL,
+  `Thn_Ajaran` bigint(20) NOT NULL,
+  `Jenis` enum('F1','F2','F3','UTS','UAS') NOT NULL,
+  `Nilai_Pengetahuan` int(11) NOT NULL,
+  `Nilai_Keterampilan` int(11) NOT NULL,
+  `Action` varchar(6) NOT NULL,
+  `Username` varchar(100) NOT NULL,
+  `Waktu` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `log_nilais`
@@ -157,6 +512,21 @@ INSERT INTO `log_nilais` (`Nilai_ID`, `Kode_Mapel`, `Siswa_ID`, `Thn_Ajaran`, `J
 (5, 'BIND', 117795632, 2, 'UAS', 88, 75, 'Update', 'CURRENT_USER()', '2023-11-27 09:58:57'),
 (6, 'BING', 117795632, 2, 'F1', 89, 80, 'Update', 'CURRENT_USER()', '2023-11-27 10:00:15');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_nilai_ekskuls`
+--
+
+CREATE TABLE `log_nilai_ekskuls` (
+  `ID_Nilai_Ekskul` int(11) NOT NULL,
+  `ID_Ekskul_Siswa` varchar(10) NOT NULL,
+  `Nilai` enum('A','B','C','D','E') NOT NULL,
+  `Action` varchar(6) NOT NULL,
+  `Username` varchar(100) NOT NULL,
+  `Waktu` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 --
 -- Dumping data for table `log_nilai_ekskuls`
 --
@@ -164,6 +534,157 @@ INSERT INTO `log_nilais` (`Nilai_ID`, `Kode_Mapel`, `Siswa_ID`, `Thn_Ajaran`, `J
 INSERT INTO `log_nilai_ekskuls` (`ID_Nilai_Ekskul`, `ID_Ekskul_Siswa`, `Nilai`, `Action`, `Username`, `Waktu`) VALUES
 (1, 'MNR001', '', 'Insert', 'root@localhost', '2023-11-27 08:50:35'),
 (2, 'PRK001', '', 'Insert', 'root@localhost', '2023-11-27 08:50:35');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_prestasis`
+--
+
+CREATE TABLE `log_prestasis` (
+  `ID_Prestasi` varchar(10) NOT NULL,
+  `Siswa` int(11) NOT NULL,
+  `Jenis_Prestasi` enum('Akademik','Non-Akademik') NOT NULL,
+  `Deskripsi` varchar(150) NOT NULL,
+  `Tanggal` date NOT NULL,
+  `Action` varchar(6) NOT NULL,
+  `Username` varchar(100) NOT NULL,
+  `Waktu` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_rapors`
+--
+
+CREATE TABLE `log_rapors` (
+  `ID_Rapor` int(11) NOT NULL,
+  `ID_Nilai` int(11) NOT NULL,
+  `ID_Ekskul_Nilai` int(11) NOT NULL,
+  `Prestasi_ID` varchar(10) NOT NULL,
+  `Absensi_ID` int(11) NOT NULL,
+  `Absensi_Ekskul` int(11) NOT NULL,
+  `Action` varchar(6) NOT NULL,
+  `Username` varchar(100) NOT NULL,
+  `Waktu` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_roles`
+--
+
+CREATE TABLE `log_roles` (
+  `ID_Roles` bigint(20) NOT NULL,
+  `Email` varchar(150) NOT NULL,
+  `Password` varchar(60) NOT NULL,
+  `Nama_Role` enum('Kepala Sekolah','Siswa','Guru','Tata Usaha') NOT NULL,
+  `Action` varchar(6) NOT NULL,
+  `Username` varchar(100) NOT NULL,
+  `Waktu` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_role_assignments`
+--
+
+CREATE TABLE `log_role_assignments` (
+  `ID_Role_Assignment` int(11) NOT NULL,
+  `Role_ID` bigint(20) NOT NULL,
+  `Siswa_ID` int(11) NOT NULL,
+  `NUPTK_Guru` bigint(20) NOT NULL,
+  `Pegawai_ID` bigint(20) NOT NULL,
+  `Kepsek_ID` bigint(20) NOT NULL,
+  `Action` varchar(6) NOT NULL,
+  `Username` varchar(100) NOT NULL,
+  `Waktu` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_siswas`
+--
+
+CREATE TABLE `log_siswas` (
+  `NISN` int(11) NOT NULL,
+  `NIPD` int(11) NOT NULL,
+  `Nama_Siswa` varchar(150) NOT NULL,
+  `Jenis_Kelamin` enum('L','P') NOT NULL,
+  `Tempat_Lahir` varchar(100) NOT NULL,
+  `Tanggal_Lahir` date NOT NULL,
+  `Agama` enum('Kristen','Katholik','Hindu','Buddha','Konghucu') NOT NULL,
+  `Alamat` varchar(255) NOT NULL,
+  `No_hp` varchar(13) NOT NULL,
+  `Status_dlm_Klrg` enum('Anak Kandung','Anak Tiri') NOT NULL,
+  `Nama_Ayah` varchar(150) NOT NULL,
+  `Nama_Ibu` varchar(150) NOT NULL,
+  `Pekerjaan_Ayah` varchar(50) NOT NULL,
+  `Pekerjaan_Ibu` varchar(50) NOT NULL,
+  `No_Rek_Bank` varchar(50) NOT NULL,
+  `Bank_Atas_Nama` varchar(50) NOT NULL,
+  `Status_Siswa` enum('Aktif','Lulus','Pindah','Dropout','Tidak Aktif') NOT NULL,
+  `Sekolah_Asal` varchar(100) NOT NULL,
+  `Anak_Ke` int(11) NOT NULL,
+  `Action` varchar(6) NOT NULL,
+  `Username` varchar(100) NOT NULL,
+  `Waktu` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_tata_usahas`
+--
+
+CREATE TABLE `log_tata_usahas` (
+  `ID_Pegawai` bigint(20) NOT NULL,
+  `Nama_Pegawai` varchar(150) NOT NULL,
+  `Jenis_Kelamin` enum('L','P') NOT NULL,
+  `TMT_Kerja` date NOT NULL,
+  `Tempat_Lahir` varchar(100) NOT NULL,
+  `Tanggal_Lahir` date NOT NULL,
+  `Jenjang_Pendidikan` varchar(100) NOT NULL,
+  `Status` enum('Aktif','Resign','Diberhentikan','Cuti') NOT NULL,
+  `Action` varchar(6) NOT NULL,
+  `Username` varchar(100) NOT NULL,
+  `Waktu` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_wali_siswas`
+--
+
+CREATE TABLE `log_wali_siswas` (
+  `ID_Wali` int(11) NOT NULL,
+  `Nama_Wali` varchar(150) NOT NULL,
+  `ID_Siswa` int(11) NOT NULL,
+  `Pekerjaan_Wali` varchar(50) NOT NULL,
+  `No_Rek_Bank` varchar(50) NOT NULL,
+  `Bank_Atas_Nama` varchar(50) NOT NULL,
+  `Action` varchar(6) NOT NULL,
+  `Username` varchar(100) NOT NULL,
+  `Waktu` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mata_pelajarans`
+--
+
+CREATE TABLE `mata_pelajarans` (
+  `Kode_Mapel` char(5) NOT NULL,
+  `Nama_Mapel` varchar(50) NOT NULL,
+  `KKM` int(11) NOT NULL,
+  `Guru_Mapel` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `mata_pelajarans`
@@ -181,6 +702,18 @@ INSERT INTO `mata_pelajarans` (`Kode_Mapel`, `Nama_Mapel`, `KKM`, `Guru_Mapel`) 
 ('SBY', 'SENI BUDAYA', 70, 8450774675230033),
 ('TEST', 'tes', 80, 7545772673130023),
 ('TIK', 'Teknologi Informasi dan Komunikasi', 75, 125298476722301635);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -232,6 +765,22 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (43, '2023_12_02_082339_create_log_role_assignments_table', 1),
 (44, '2023_12_02_084514_create_procedure_lists_table', 1);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nilais`
+--
+
+CREATE TABLE `nilais` (
+  `Nilai_ID` int(11) NOT NULL,
+  `Kode_Mapel` char(5) NOT NULL,
+  `Siswa_ID` int(11) NOT NULL,
+  `Thn_Ajaran` bigint(20) NOT NULL,
+  `Jenis` enum('F1','F2','F3','UTS','UAS') NOT NULL,
+  `Nilai_Pengetahuan` int(11) NOT NULL,
+  `Nilai_Keterampilan` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 --
 -- Dumping data for table `nilais`
 --
@@ -248,6 +797,18 @@ INSERT INTO `nilais` (`Nilai_ID`, `Kode_Mapel`, `Siswa_ID`, `Thn_Ajaran`, `Jenis
 (9, 'BING', 117795632, 2, 'UTS', 89, 78),
 (10, 'BING', 117795632, 2, 'UAS', 89, 78);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nilai_ekskuls`
+--
+
+CREATE TABLE `nilai_ekskuls` (
+  `ID_Nilai_Ekskul` int(11) NOT NULL,
+  `ID_Ekskul_Siswa` varchar(10) NOT NULL,
+  `Nilai` enum('A','B','C','D','E') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 --
 -- Dumping data for table `nilai_ekskuls`
 --
@@ -256,6 +817,51 @@ INSERT INTO `nilai_ekskuls` (`ID_Nilai_Ekskul`, `ID_Ekskul_Siswa`, `Nilai`) VALU
 (1, 'MNR001', ''),
 (2, 'PRK001', '');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_reset_tokens`
+--
+
+CREATE TABLE `password_reset_tokens` (
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `personal_access_tokens`
+--
+
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
+  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prestasis`
+--
+
+CREATE TABLE `prestasis` (
+  `ID_Prestasi` varchar(10) NOT NULL,
+  `Siswa` int(11) NOT NULL,
+  `Jenis_Prestasi` enum('Akademik','Non-Akademik') NOT NULL,
+  `Deskripsi` varchar(150) NOT NULL,
+  `Tanggal` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 --
 -- Dumping data for table `prestasis`
 --
@@ -263,15 +869,48 @@ INSERT INTO `nilai_ekskuls` (`ID_Nilai_Ekskul`, `ID_Ekskul_Siswa`, `Nilai`) VALU
 INSERT INTO `prestasis` (`ID_Prestasi`, `Siswa`, `Jenis_Prestasi`, `Deskripsi`, `Tanggal`) VALUES
 ('P01', 78791950, '', 'Karate', '2023-10-12');
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `roles`
+-- Table structure for table `rapors`
 --
 
-INSERT INTO `roles` (`ID_Roles`, `Email`, `Password`, `Nama_Role`) VALUES
-(1, 'superadmin@gmail.com', '$2y$12$7izPmOB2lgA6c6Mbc9POmOM4/o1Wx..ztE7lKkuY3KBuzds6cs.9u', 'Kepala Sekolah'),
-(2, 'guru@gmail.com', '$2y$12$7A2L9ZYwuVNVYaoblAd02eccmp/SAmFkI2mn16wJUhsXSh6prn2je', 'Guru'),
-(3, 'tatausaha@gmail.com', '$2y$12$/k2b5SMCHfoNkA0yitkXjOMaUOHP.zRMxHkiAd0iGfdQtccYlpATG', 'Tata Usaha'),
-(4, 'siswa@gmail.com', '$2y$12$kOGbVOadvrq4htPBcj3apumjL8DBYr7gKutBTGopn9h6c56XWRx1W', 'Siswa');
+CREATE TABLE `rapors` (
+  `ID_Rapor` int(11) NOT NULL,
+  `ID_Nilai` int(11) NOT NULL,
+  `ID_Ekskul_Nilai` int(11) NOT NULL,
+  `Prestasi_ID` varchar(10) NOT NULL,
+  `Absensi_ID` int(11) NOT NULL,
+  `Absensi_Ekskul` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `siswas`
+--
+
+CREATE TABLE `siswas` (
+  `NISN` int(11) NOT NULL,
+  `NIPD` int(11) NOT NULL,
+  `Nama_Siswa` varchar(150) NOT NULL,
+  `Jenis_Kelamin` enum('L','P') NOT NULL,
+  `Tempat_Lahir` varchar(100) NOT NULL,
+  `Tanggal_Lahir` date NOT NULL,
+  `Agama` enum('Kristen','Katholik','Hindu','Buddha','Konghucu') NOT NULL,
+  `Alamat` varchar(255) NOT NULL,
+  `No_hp` varchar(13) NOT NULL,
+  `Status_dlm_Klrg` enum('Anak Kandung','Anak Tiri') NOT NULL,
+  `Nama_Ayah` varchar(150) NOT NULL,
+  `Nama_Ibu` varchar(150) NOT NULL,
+  `Pekerjaan_Ayah` varchar(50) NOT NULL,
+  `Pekerjaan_Ibu` varchar(50) NOT NULL,
+  `No_Rek_Bank` varchar(50) DEFAULT NULL,
+  `Bank_Atas_Nama` varchar(50) DEFAULT NULL,
+  `Status_Siswa` enum('Aktif','Lulus','Pindah','Dropout','Tidak Aktif') NOT NULL,
+  `Sekolah_Asal` varchar(100) NOT NULL,
+  `Anak_Ke` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `siswas`
@@ -288,6 +927,20 @@ INSERT INTO `siswas` (`NISN`, `NIPD`, `Nama_Siswa`, `Jenis_Kelamin`, `Tempat_Lah
 (114715088, 0, 'AHMAD JUHARI SITEPU', 'L', 'SEI MUKA 2', '2012-01-22', 'Kristen', 'DUSUN III Anjung Ganjang, KECAMATAN SIMPANG EMPAT,21271', '082267878625', 'Anak Kandung', 'AGUS SITEPU', 'DARMA WATI BR BUTAR BUTAR', 'WIRASWASTA', 'WIRASWASTA', '', '', 'Aktif', 'UPTD SDN 016546 TELUK DALAM', 1),
 (117795632, 0, 'ABDUL ROSYIIT', 'L', 'LANGKAT', '2011-04-26', 'Kristen', 'DUSUN 1 TANJUNG JATI KECAMATAN BINJAI, KODE POS 20761', '082164934533', 'Anak Kandung', 'MISDIANTO', 'SRI WAHYUNI', 'WIRASWASTA', 'WIRASWASTA', '', '', 'Lulus', 'SD NEGERI 026606', 3);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tahun_ajarans`
+--
+
+CREATE TABLE `tahun_ajarans` (
+  `ID_Thn_Ajaran` bigint(20) NOT NULL,
+  `Thn_Ajaran` char(9) NOT NULL,
+  `Semester` enum('Ganjil','Genap') NOT NULL,
+  `Tanggal_Mulai` date NOT NULL,
+  `Tanggal_Selesai` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 --
 -- Dumping data for table `tahun_ajarans`
 --
@@ -298,6 +951,23 @@ INSERT INTO `tahun_ajarans` (`ID_Thn_Ajaran`, `Thn_Ajaran`, `Semester`, `Tanggal
 (3, '2022/2023', 'Genap', '2023-01-10', '2023-06-28'),
 (4, '2025/2026', 'Genap', '2025-07-10', '2026-12-25');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tata_usahas`
+--
+
+CREATE TABLE `tata_usahas` (
+  `ID_Pegawai` bigint(20) NOT NULL,
+  `Nama_Pegawai` varchar(150) NOT NULL,
+  `Jenis_Kelamin` enum('L','P') NOT NULL,
+  `TMT_Kerja` date NOT NULL,
+  `Tempat_Lahir` varchar(100) NOT NULL,
+  `Tanggal_Lahir` date NOT NULL,
+  `Jenjang_Pendidikan` varchar(100) NOT NULL,
+  `Status` enum('Aktif','Resign','Diberhentikan','Cuti') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 --
 -- Dumping data for table `tata_usahas`
 --
@@ -305,15 +975,326 @@ INSERT INTO `tahun_ajarans` (`ID_Thn_Ajaran`, `Thn_Ajaran`, `Semester`, `Tanggal
 INSERT INTO `tata_usahas` (`ID_Pegawai`, `Nama_Pegawai`, `Jenis_Kelamin`, `TMT_Kerja`, `Tempat_Lahir`, `Tanggal_Lahir`, `Jenjang_Pendidikan`, `Status`) VALUES
 (19880834, 'CHANDRA', 'L', '2010-10-11', 'MEDAN', '1988-02-23', 'D-3 ILMU KOMPUTER', 'Aktif');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` enum('Kepala Sekolah','Siswa','Guru','Admin') NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Super Admin', 'superadmin@gmail.com', '2023-12-06 12:03:55', '$2y$12$7izPmOB2lgA6c6Mbc9POmOM4/o1Wx..ztE7lKkuY3KBuzds6cs.9u', NULL, '2023-12-06 12:03:55', '2023-12-06 12:03:55'),
-(2, 'guru', 'guru@gmail.com', NULL, '$2y$12$7A2L9ZYwuVNVYaoblAd02eccmp/SAmFkI2mn16wJUhsXSh6prn2je', NULL, '2023-12-06 18:11:33', '2023-12-06 18:11:33'),
-(3, 'tatausaha', 'tatausaha@gmail.com', NULL, '$2y$12$/k2b5SMCHfoNkA0yitkXjOMaUOHP.zRMxHkiAd0iGfdQtccYlpATG', NULL, '2023-12-06 18:11:53', '2023-12-06 18:11:53'),
-(4, 'siswa', 'siswa@gmail.com', NULL, '$2y$12$xoh1U3zVQAA7o0r0gj8c/O1vzNT3pISK8D9pD.zoWPiKhUAmD1gmG', '', '2023-12-06 18:12:05', '2023-12-06 18:12:05');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Super Admin', 'superadmin@gmail.com', '2023-12-06 12:03:55', '$2y$12$7izPmOB2lgA6c6Mbc9POmOM4/o1Wx..ztE7lKkuY3KBuzds6cs.9u', 'Kepala Sekolah', NULL, '2023-12-06 12:03:55', '2023-12-06 12:03:55'),
+(2, 'guru', 'guru@gmail.com', NULL, '$2y$12$7A2L9ZYwuVNVYaoblAd02eccmp/SAmFkI2mn16wJUhsXSh6prn2je', 'Guru', NULL, '2023-12-06 18:11:33', '2023-12-06 18:11:33'),
+(3, 'tatausaha', 'tatausaha@gmail.com', NULL, '$2y$12$/k2b5SMCHfoNkA0yitkXjOMaUOHP.zRMxHkiAd0iGfdQtccYlpATG', 'Admin', NULL, '2023-12-06 18:11:53', '2023-12-06 18:11:53'),
+(4, 'siswa', 'siswa@gmail.com', NULL, '$2y$12$xoh1U3zVQAA7o0r0gj8c/O1vzNT3pISK8D9pD.zoWPiKhUAmD1gmG', 'Siswa', '', '2023-12-06 18:12:05', '2023-12-06 18:12:05');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wali_siswas`
+--
+
+CREATE TABLE `wali_siswas` (
+  `ID_Wali` int(11) NOT NULL,
+  `Nama_Wali` varchar(150) NOT NULL,
+  `ID_Siswa` int(11) NOT NULL,
+  `Pekerjaan_Wali` varchar(50) NOT NULL,
+  `No_Rek_Bank` varchar(50) NOT NULL,
+  `Bank_Atas_Nama` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `absensi_ekskuls`
+--
+ALTER TABLE `absensi_ekskuls`
+  ADD PRIMARY KEY (`ID_Absensi`),
+  ADD KEY `absensi_ekskuls_id_ekskul_siswa_foreign` (`ID_Ekskul_Siswa`);
+
+--
+-- Indexes for table `absensi_kelas`
+--
+ALTER TABLE `absensi_kelas`
+  ADD PRIMARY KEY (`ID_Absensi`),
+  ADD KEY `absensi_kelas_siswa_id_foreign` (`Siswa_ID`),
+  ADD KEY `absensi_kelas_kelas_foreign` (`Kelas`);
+
+--
+-- Indexes for table `ekskul_siswas`
+--
+ALTER TABLE `ekskul_siswas`
+  ADD PRIMARY KEY (`ID_Ekskul_Siswa`),
+  ADD KEY `ekskul_siswas_ekskul_kode_foreign` (`Ekskul_Kode`),
+  ADD KEY `ekskul_siswas_siswa_id_foreign` (`Siswa_ID`),
+  ADD KEY `ekskul_siswas_thn_ajaran_foreign` (`Thn_Ajaran`);
+
+--
+-- Indexes for table `ekstrakurikulers`
+--
+ALTER TABLE `ekstrakurikulers`
+  ADD PRIMARY KEY (`Kode_Ekskul`),
+  ADD KEY `ekstrakurikulers_guru_ekskul_foreign` (`Guru_Ekskul`);
+
+--
+-- Indexes for table `guruses`
+--
+ALTER TABLE `guruses`
+  ADD PRIMARY KEY (`NUPTK`);
+
+--
+-- Indexes for table `jadwal_mapels`
+--
+ALTER TABLE `jadwal_mapels`
+  ADD PRIMARY KEY (`ID_Jadwal`),
+  ADD KEY `jadwal_mapels_kelas_id_foreign` (`Kelas_ID`),
+  ADD KEY `jadwal_mapels_kode_mapel_foreign` (`Kode_Mapel`),
+  ADD KEY `jadwal_mapels_thn_ajaran_id_foreign` (`Thn_Ajaran_ID`);
+
+--
+-- Indexes for table `kelas`
+--
+ALTER TABLE `kelas`
+  ADD PRIMARY KEY (`ID_Kelas`),
+  ADD KEY `kelas_wali_kelas_foreign` (`Wali_Kelas`);
+
+--
+-- Indexes for table `kepala_sekolahs`
+--
+ALTER TABLE `kepala_sekolahs`
+  ADD PRIMARY KEY (`ID_Kepsek`);
+
+--
+-- Indexes for table `kip_kps_pips`
+--
+ALTER TABLE `kip_kps_pips`
+  ADD PRIMARY KEY (`ID_Status`),
+  ADD KEY `kip_kps_pips_id_siswa_foreign` (`ID_Siswa`);
+
+--
+-- Indexes for table `mata_pelajarans`
+--
+ALTER TABLE `mata_pelajarans`
+  ADD PRIMARY KEY (`Kode_Mapel`),
+  ADD KEY `mata_pelajarans_guru_mapel_foreign` (`Guru_Mapel`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `nilais`
+--
+ALTER TABLE `nilais`
+  ADD PRIMARY KEY (`Nilai_ID`),
+  ADD KEY `nilais_kode_mapel_foreign` (`Kode_Mapel`),
+  ADD KEY `nilais_siswa_id_foreign` (`Siswa_ID`),
+  ADD KEY `nilais_thn_ajaran_foreign` (`Thn_Ajaran`);
+
+--
+-- Indexes for table `nilai_ekskuls`
+--
+ALTER TABLE `nilai_ekskuls`
+  ADD PRIMARY KEY (`ID_Nilai_Ekskul`),
+  ADD KEY `nilai_ekskuls_id_ekskul_siswa_foreign` (`ID_Ekskul_Siswa`);
+
+--
+-- Indexes for table `password_reset_tokens`
+--
+ALTER TABLE `password_reset_tokens`
+  ADD PRIMARY KEY (`email`);
+
+--
+-- Indexes for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indexes for table `prestasis`
+--
+ALTER TABLE `prestasis`
+  ADD PRIMARY KEY (`ID_Prestasi`),
+  ADD KEY `prestasis_siswa_foreign` (`Siswa`);
+
+--
+-- Indexes for table `rapors`
+--
+ALTER TABLE `rapors`
+  ADD PRIMARY KEY (`ID_Rapor`),
+  ADD KEY `rapors_id_nilai_foreign` (`ID_Nilai`),
+  ADD KEY `rapors_id_ekskul_nilai_foreign` (`ID_Ekskul_Nilai`),
+  ADD KEY `rapors_prestasi_id_foreign` (`Prestasi_ID`),
+  ADD KEY `rapors_absensi_id_foreign` (`Absensi_ID`),
+  ADD KEY `rapors_absensi_ekskul_foreign` (`Absensi_Ekskul`);
+
+--
+-- Indexes for table `siswas`
+--
+ALTER TABLE `siswas`
+  ADD PRIMARY KEY (`NISN`);
+
+--
+-- Indexes for table `tahun_ajarans`
+--
+ALTER TABLE `tahun_ajarans`
+  ADD PRIMARY KEY (`ID_Thn_Ajaran`);
+
+--
+-- Indexes for table `tata_usahas`
+--
+ALTER TABLE `tata_usahas`
+  ADD PRIMARY KEY (`ID_Pegawai`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- Indexes for table `wali_siswas`
+--
+ALTER TABLE `wali_siswas`
+  ADD PRIMARY KEY (`ID_Wali`),
+  ADD KEY `wali_siswas_id_siswa_foreign` (`ID_Siswa`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+
+--
+-- AUTO_INCREMENT for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `absensi_ekskuls`
+--
+ALTER TABLE `absensi_ekskuls`
+  ADD CONSTRAINT `absensi_ekskuls_id_ekskul_siswa_foreign` FOREIGN KEY (`ID_Ekskul_Siswa`) REFERENCES `ekskul_siswas` (`ID_Ekskul_Siswa`);
+
+--
+-- Constraints for table `absensi_kelas`
+--
+ALTER TABLE `absensi_kelas`
+  ADD CONSTRAINT `absensi_kelas_kelas_foreign` FOREIGN KEY (`Kelas`) REFERENCES `kelas` (`ID_Kelas`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `absensi_kelas_siswa_id_foreign` FOREIGN KEY (`Siswa_ID`) REFERENCES `siswas` (`NISN`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `ekskul_siswas`
+--
+ALTER TABLE `ekskul_siswas`
+  ADD CONSTRAINT `ekskul_siswas_ekskul_kode_foreign` FOREIGN KEY (`Ekskul_Kode`) REFERENCES `ekstrakurikulers` (`Kode_Ekskul`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `ekskul_siswas_siswa_id_foreign` FOREIGN KEY (`Siswa_ID`) REFERENCES `siswas` (`NISN`),
+  ADD CONSTRAINT `ekskul_siswas_thn_ajaran_foreign` FOREIGN KEY (`Thn_Ajaran`) REFERENCES `tahun_ajarans` (`ID_Thn_Ajaran`);
+
+--
+-- Constraints for table `ekstrakurikulers`
+--
+ALTER TABLE `ekstrakurikulers`
+  ADD CONSTRAINT `ekstrakurikulers_guru_ekskul_foreign` FOREIGN KEY (`Guru_Ekskul`) REFERENCES `guruses` (`NUPTK`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `jadwal_mapels`
+--
+ALTER TABLE `jadwal_mapels`
+  ADD CONSTRAINT `jadwal_mapels_kelas_id_foreign` FOREIGN KEY (`Kelas_ID`) REFERENCES `kelas` (`ID_Kelas`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `jadwal_mapels_kode_mapel_foreign` FOREIGN KEY (`Kode_Mapel`) REFERENCES `mata_pelajarans` (`Kode_Mapel`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `jadwal_mapels_thn_ajaran_id_foreign` FOREIGN KEY (`Thn_Ajaran_ID`) REFERENCES `tahun_ajarans` (`ID_Thn_Ajaran`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `kelas`
+--
+ALTER TABLE `kelas`
+  ADD CONSTRAINT `kelas_wali_kelas_foreign` FOREIGN KEY (`Wali_Kelas`) REFERENCES `guruses` (`NUPTK`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `kip_kps_pips`
+--
+ALTER TABLE `kip_kps_pips`
+  ADD CONSTRAINT `kip_kps_pips_id_siswa_foreign` FOREIGN KEY (`ID_Siswa`) REFERENCES `siswas` (`NISN`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `mata_pelajarans`
+--
+ALTER TABLE `mata_pelajarans`
+  ADD CONSTRAINT `mata_pelajarans_guru_mapel_foreign` FOREIGN KEY (`Guru_Mapel`) REFERENCES `guruses` (`NUPTK`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `nilais`
+--
+ALTER TABLE `nilais`
+  ADD CONSTRAINT `nilais_kode_mapel_foreign` FOREIGN KEY (`Kode_Mapel`) REFERENCES `mata_pelajarans` (`Kode_Mapel`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `nilais_siswa_id_foreign` FOREIGN KEY (`Siswa_ID`) REFERENCES `siswas` (`NISN`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `nilais_thn_ajaran_foreign` FOREIGN KEY (`Thn_Ajaran`) REFERENCES `tahun_ajarans` (`ID_Thn_Ajaran`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `nilai_ekskuls`
+--
+ALTER TABLE `nilai_ekskuls`
+  ADD CONSTRAINT `nilai_ekskuls_id_ekskul_siswa_foreign` FOREIGN KEY (`ID_Ekskul_Siswa`) REFERENCES `ekskul_siswas` (`ID_Ekskul_Siswa`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `prestasis`
+--
+ALTER TABLE `prestasis`
+  ADD CONSTRAINT `prestasis_siswa_foreign` FOREIGN KEY (`Siswa`) REFERENCES `siswas` (`NISN`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `rapors`
+--
+ALTER TABLE `rapors`
+  ADD CONSTRAINT `rapors_absensi_ekskul_foreign` FOREIGN KEY (`Absensi_Ekskul`) REFERENCES `absensi_ekskuls` (`ID_Absensi`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `rapors_absensi_id_foreign` FOREIGN KEY (`Absensi_ID`) REFERENCES `absensi_kelas` (`ID_Absensi`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `rapors_id_ekskul_nilai_foreign` FOREIGN KEY (`ID_Ekskul_Nilai`) REFERENCES `nilai_ekskuls` (`ID_Nilai_Ekskul`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `rapors_id_nilai_foreign` FOREIGN KEY (`ID_Nilai`) REFERENCES `nilais` (`Nilai_ID`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `rapors_prestasi_id_foreign` FOREIGN KEY (`Prestasi_ID`) REFERENCES `prestasis` (`ID_Prestasi`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `wali_siswas`
+--
+ALTER TABLE `wali_siswas`
+  ADD CONSTRAINT `wali_siswas_id_siswa_foreign` FOREIGN KEY (`ID_Siswa`) REFERENCES `siswas` (`NISN`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
