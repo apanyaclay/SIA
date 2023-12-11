@@ -12,7 +12,6 @@
               <tr>
             
                 <th scope="col">NISN</th>
-                <th scope="col">NIPD</th>
                 <th scope="col">Nama_Siswa</th>
                 <th scope="col">Jenis_Kelamin</th>
                 <th scope="col">Tempat_Lahir</th>
@@ -20,6 +19,7 @@
                 <th scope="col">Agama</th>
                 <th scope="col">Alamat</th>
                 <th scope="col">No_hp</th>
+                <th scope="col">KELAS</th>
                 <th scope="col">Status dlm Keluarga</th>
                 <th scope="col">Nama_Ayah</th>
                 <th scope="col">Nama_Ibu</th>
@@ -37,7 +37,6 @@
                 <tr>
                    @foreach($siswas as $siswa)
                     <td>{{ $siswa->NISN }}</td>
-                    <td>{{ $siswa->NIPD }}</td>
                     <td>{{ $siswa->Nama_Siswa }}</td>
                     <td>{{ $siswa->Jenis_Kelamin }}</td>
                     <td>{{ $siswa->Tempat_Lahir }}</td>
@@ -45,6 +44,7 @@
                     <td>{{ $siswa->Agama }}</td>
                     <td>{{ $siswa->Alamat }}</td>
                     <td>{{ $siswa->No_hp }}</td>
+                    <td>{{ $siswa->Kelas }}</td>
                     <td>{{ $siswa->Status_dlm_Klrg }}</td>
                     <td>{{ $siswa->Nama_Ayah }}</td>
                     <td>{{ $siswa->Nama_Ibu }}</td>

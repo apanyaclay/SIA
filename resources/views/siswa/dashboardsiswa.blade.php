@@ -21,12 +21,14 @@
                                     <div class="col-4" style="font-weight: bolder;">
                                         <div>NAMA</div>
                                         <div>NISN</div>
-                                        <div>KELAS </div>
+                                        <div>JENIS KELAMIN </div>
                                     </div>
                                     <div class="col-8">
-                                        <div>SHAFIRA HILMI WAHYUDI</div>
-                                        <div>123456678</div>
-                                        <div>9-A</div>
+                                      @foreach ($data as $item)
+                                      <div>{{$item->Nama_Siswa}}</div>
+                                      <div>{{$item->NISN}}</div>
+                                      <div>{{$item->Jenis_Kelamin}}</div>
+                                      @endforeach
                                     </div>
                                   </div>
                                 </div>

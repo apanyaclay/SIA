@@ -20,7 +20,7 @@
         <tr>
           <th scope="row">{{$item->ID_Kelas}}</th>
           <td>{{$item->Nama_Kelas}}</td>
-          <td><a type="button"  href="{{url('superadmin/listsiswa', $item->ID_Kelas)}}"  class="btn btn-warning">Lists Siswa</a></td>
+          <td><a type="button"  href="{{url('superadmin/listsiswaNS', $item->ID_Kelas)}}"  class="btn btn-warning">Lists Siswa</a></td>
         </tr>
         @endforeach
       </tbody>

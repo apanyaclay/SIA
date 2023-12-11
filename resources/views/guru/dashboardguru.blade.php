@@ -22,9 +22,11 @@
                                         <div>Pelajaran </div>
                                     </div>
                                     <div class="col-8">
-                                        <div>Herlia Puspita Dewi</div>
-                                        <div>1148770671130093</div>
-                                        <div>Guru Wali Kelas</div>
+                                      @foreach ($data as $item)
+                                      <div>{{$item->Nama_Guru}}</div>
+                                      <div>{{$item->NUPTK}}</div>
+                                      <div>{{$item->Jenis_Kelamin}}</div>
+                                      @endforeach
                                     </div>
                                   </div>
                                 </div>

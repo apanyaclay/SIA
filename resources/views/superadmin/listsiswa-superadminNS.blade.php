@@ -8,27 +8,20 @@
        <thead style="background-color: #748E63; color: #000;" >
          <tr>
            <th scope="col">No.</th>
-           <th scope="col">NAMA</th>
            <th scope="col">NISN</th>
+           <th scope="col">NAMA</th>
            <th scope="col">AKSI</th>
          </tr>
        </thead>     
        <tbody >
-         <tr>
-           <th scope="row">1</th>
-           <td>Kairi hbvibrevbi</td>
-           <td>21123356</td>
-         <td><a type="button" href="/editraporsiswa-superadmin"  class="btn btn-warning"><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i>Edit Rapor </a></td>       
-  </tr>
-  
-  <!-- baris kedua -->
-  <tr>
-     <th scope="row">2, dst</th>
-     <td>Kairi hbvibrevbi</td>
-     <td>21123356</td>
-     <td><a type="button" href="/editraporsiswa-superadmin"  class="btn btn-warning"><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i>Edit Rapor </a></td>        
-  </tr>    
-  
+        @for ($i = 0; $i < count($data); $i++)
+        <tr>
+          <th scope="row">{{$i}}</th>
+          <td>{{$data[$i]->NISN}}</td>
+          <td>{{$data[$i]->Nama_Siswa}}</td>
+        <td><a type="button" href="{{url('superadmin/listnilaisiswa', $data[$i]->NISN)}}"  class="btn btn-warning"><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i>Edit Rapor </a></td>       
+          </tr>
+        @endfor
        </tbody>
      </table>
      </div> 

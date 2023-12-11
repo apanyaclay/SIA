@@ -26,7 +26,8 @@
         <td>{{ $tulist->Nama_Pegawai }}</td>
         <td>{{ $tulist->Jenjang_Pendidikan }}</td>
         <td><a type="button"  href="{{url('superadmin/detailtu', $tulist->ID_Pegawai)}}"  class="btn btn-warning">Lihat Detail</a></td>
-        <td>
+        <td><a type="button" href="{{ url('superadmin/edittu', $tulist->ID_Pegawai) }}"
+          class="btn btn-warning"><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i></a>
           <a type="button" href="" class="btn btn-warning"  data-bs-toggle="modal" data-bs-target="#exampleModal" data-ekskulid="{{ $tulist->ID_Pegawai }}"><i class="fa-solid fa-delete-left" style="color: #ffffff;"></i></a></td>
     </tr>
     @endforeach

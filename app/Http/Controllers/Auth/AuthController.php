@@ -40,7 +40,7 @@ class AuthController extends Controller
                     return redirect('/siswa/dashboard');
                 case 'Guru':
                     return redirect('/guru/dashboard');
-                default:
+                case 'Admin':
                     return redirect('/admin/dashboard');
             }
         } else {

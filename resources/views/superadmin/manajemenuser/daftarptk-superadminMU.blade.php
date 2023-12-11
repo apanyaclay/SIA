@@ -29,7 +29,8 @@
                 <td>{{ $ptklist->NUPTK }}</td>
                 <td>{{ $ptklist->Jenis_PTK }}</td>
                 <td><a type="button"  href="{{url('superadmin/detailptk', $ptklist->NUPTK)}}"  class="btn btn-warning">Lihat Detail</a></td>
-                <td>
+                <td><a type="button" href="{{ url('superadmin/editptk', $ptklist->NUPTK) }}"
+                  class="btn btn-warning"><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i></a>
                     <a type="button" href="" class="btn btn-warning"  data-bs-toggle="modal" data-bs-target="#exampleModal" data-ekskulid="{{ $ptklist->NUPTK }}"><i class="fa-solid fa-delete-left" style="color: #ffffff;"></i></a></td>
             </tr>
             @endforeach

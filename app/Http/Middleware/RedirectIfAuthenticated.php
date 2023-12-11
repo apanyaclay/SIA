@@ -21,7 +21,7 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect('/superadmin');
+                return redirect(RouteServiceProvider::HOME);
             }
         }
 

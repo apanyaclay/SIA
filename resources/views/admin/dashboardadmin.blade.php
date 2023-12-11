@@ -20,12 +20,14 @@
                 <div class="col-4" style="font-weight: bolder;">
                     <div>NAMA</div>
                     <div>NUPTK</div>
-                    <div>Pelajaran </div>
+                    <div>JENIS KELAMIN </div>
                 </div>
                 <div class="col-8">
-                    <div>SHAFIRA HILMI WAHYUDI</div>
-                    <div>Yohana Marito Marbun</div>
-                    <div>Yohana Marito Marbun</div>
+                  @foreach ($data as $item)
+                  <div>{{$item->Nama_Pegawai}}</div>
+                  <div>{{$item->ID_Pegawai}}</div>
+                  <div>{{$item->Jenis_Kelamin}}</div>
+                  @endforeach
                 </div>
               </div>
             </div>

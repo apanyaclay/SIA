@@ -19,14 +19,14 @@
                                   <div class="row">
                                     <div class="col-4" style="font-weight: bolder;">
                                         <div>NAMA</div>
-                                        <div>NUPTK {{Auth::User()->role}}</div>
-                                        <div>Status </div>
+                                        <div>NUPTK</div>
+                                        <div>JENIS KELAMIN </div>
                                     </div>
                                     <div class="col-8">
                                       @foreach ($data as $item)
                                       <div>{{$item->Nama_Kepsek}}</div>
                                       <div>{{$item->ID_Kepsek}}</div>
-                                      <div>{{$item->Status}}</div>
+                                      <div>{{$item->Jenis_Kelamin}}</div>
                                       @endforeach
                                     </div>
                                   </div>

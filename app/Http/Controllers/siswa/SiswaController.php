@@ -4,11 +4,16 @@ namespace App\Http\Controllers\siswa;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SiswaController extends Controller
 {
     public function index () {
-        return view('siswa.dashboardsiswa');
+        $id = Auth::user()->to_role;
+        $data = DB::select('SELECT * FROM siswas Where NISN = ?', [$id]);
+        
+        return view('siswa.dashboardsiswa',compact('data'));
     }
 
     public function jadwal () {

@@ -1,7 +1,7 @@
 @extends('layouts.main_superadmin')
 
 @section('container')
-    <div class="edit text-sm-end"><a href="{{ route('tambahsiswasadmin') }}" type="button"
+    <div class="edit text-sm-end"><a href="{{ url('superadmin/tambahsiswa', $kode) }}" type="button"
             class="btn btn-secondary mt-3 mb-3"><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i> Tambah Siswa</a>
     </div>
 
@@ -17,33 +17,31 @@
                 <tr>
                     <th scope="col">NO</th>
                     <th scope="col">NISN</th>
+                    <th scope="col">NAMA</th>
                     <th scope="col">KELAS</th>
-                    <th scope="col">TANGGAL</th>
-                    <th scope="col">HADIR</th>
-                    <th scope="col">IZIN</th>
-                    <th scope="col">ALPA</th>
-                    <th scope="col">SAKIT</th>
+                    <th scope="col">AGAMA</th>
+                    <th scope="col">JENIS KELAMIN</th>
+                    <th scope="col">STATUS</th>
                     <th scope="col">DETAIL SISWA</th>
                     <th scope="col">EDIT</th>
                 </tr>
             </thead>
             <tbody>
-                @for ($i = 0; $i < count($absensi_kelas); $i++)
+                @for ($i = 0; $i < count($siswa); $i++)
                     <tr>
                         <td>{{ $i+1 }}</td>
-                        <td>{{ $absensi_kelas[$i]->Siswa_ID }}</td>
-                        <td>{{ $absensi_kelas[$i]->Kelas }}</td>
-                        <td>{{ $absensi_kelas[$i]->Tanggal }}</td>
-                        <td>{{ $absensi_kelas[$i]->Hadir }}</td>
-                        <td>{{ $absensi_kelas[$i]->Izin }}</td>
-                        <td>{{ $absensi_kelas[$i]->Alpa }}</td>
-                        <td>{{ $absensi_kelas[$i]->Sakit }}</td>
-                        <td><a type="button" href="{{ url('/superadmin/detailsiswa', $absensi_kelas[$i]->Siswa_ID) }}"
+                        <td>{{ $siswa[$i]->NISN }}</td>
+                        <td>{{ $siswa[$i]->Nama_Siswa }}</td>
+                        <td>{{ $siswa[$i]->Kelas }}</td>
+                        <td>{{ $siswa[$i]->Agama }}</td>
+                        <td>{{ $siswa[$i]->Jenis_Kelamin }}</td>
+                        <td>{{ $siswa[$i]->Status_Siswa }}</td>
+                        <td><a type="button" href="{{ url('/superadmin/detailsiswa', $siswa[$i]->NISN) }}"
                                 class="btn btn-warning">Lihat Detail</a></td>
-                        <td><a type="button" href="{{ url('superadmin/editsiswa', $absensi_kelas[$i]->Siswa_ID) }}"
+                        <td><a type="button" href="{{ url('superadmin/editsiswa', $siswa[$i]->NISN) }}"
                                 class="btn btn-warning"><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i></a>
                             <a type="button" href="" class="btn btn-warning" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal" data-ekskulid="{{ $absensi_kelas[$i]->ID_Absensi }}"><i
+                                data-bs-target="#exampleModal" data-ekskulid="{{ $siswa[$i]->NISN }}"><i
                                     class="fa-solid fa-delete-left" style="color: #ffffff;"></i></a>
                         </td>
                     </tr>

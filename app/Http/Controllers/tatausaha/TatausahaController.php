@@ -4,11 +4,16 @@ namespace App\Http\Controllers\tatausaha;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class TatausahaController extends Controller
 {
     public function index(){
-        return view('admin.dashboardadmin');
+        $id = Auth::user()->to_role;
+        $data = DB::select('SELECT * FROM tata_usahas WHERE ID_Pegawai = ?', [$id]);
+        return view('admin.dashboardadmin', compact('data'));
     }
 
     public function daftarkelassiswa(){

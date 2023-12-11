@@ -4,12 +4,15 @@ namespace App\Http\Controllers\kepsek;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB; // Import the DB facade
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class KepsekController extends Controller
 {
     public function index () {
-        $data = DB::select('SELECT * FROM kepala_sekolahs');
+        $id = Auth::user()->to_role;
+        $data = DB::select('SELECT * FROM kepala_sekolahs WHERE ID_Kepsek = ?', [$id]);
         return view('superadmin.dashboardsuperadmin', compact('data'));
     }
 
@@ -51,9 +54,9 @@ class KepsekController extends Controller
     }
 
     public function listsiswa ($kode) {
-        $absensi_kelas = DB::select('SELECT * FROM absensi_kelas WHERE Kelas = ?', [$kode]);
+        $siswa = DB::select('SELECT * FROM siswas WHERE Kelas = ?', [$kode]);
 
-        return view('superadmin.manajemenuser.listsiswa-superadminMU', compact('absensi_kelas'));
+        return view('superadmin.manajemenuser.listsiswa-superadminMU', compact('siswa', 'kode'));
     }
 
     public function editsiswa ($kode) {
@@ -103,7 +106,7 @@ class KepsekController extends Controller
                 'Anak_Ke' => $request->ak,
             ]);
             toast('Your Data as been submited!','success');
-            return redirect()->back();
+            return redirect('/superadmin/daftarkelassiswa');
         } else {
             toast('Your Data as failed submited!','error');
             return redirect()->back();
@@ -111,13 +114,15 @@ class KepsekController extends Controller
     }
 
     public function deletesiswa($kode){
-        DB::table('absensi_kelas')->where(["ID_Absensi" => $kode])->delete();
+        DB::table('siswas')->where(["NISN" => $kode])->delete();
+        DB::table('users')->where('to_role', $kode)->delete();
         toast('Your Data as been deleted!','success');
         return redirect()->back();
     }
 
-    public function tambahsiswa () {
-        return view('superadmin.manajemenuser.tambahsiswa-superadminMU');
+    public function tambahsiswa ($kode) {
+
+        return view('superadmin.manajemenuser.tambahsiswa-superadminMU', compact('kode'));
     }
 
     public function tambahsiswaPost (Request $request) {
@@ -132,6 +137,7 @@ class KepsekController extends Controller
             'ak' => 'required',
             'ap' => 'required',
             'tl' => 'required',
+            'kelas' => 'required',
             'sa' => 'required',
             'nay' => 'required',
             'nib' => 'required',
@@ -145,7 +151,6 @@ class KepsekController extends Controller
         if ($data) {
             DB::table('siswas')->insert([
                 'NISN' => $request->nis,
-                'NIPD' => 0,
                 'Nama_Siswa' => $request->nama,
                 'Jenis_Kelamin' => $request->jk,
                 'Tempat_Lahir' => $request->tempat,
@@ -153,6 +158,7 @@ class KepsekController extends Controller
                 'Agama' => $request->agama,
                 'Alamat' => $request->ap,
                 'No_hp' => $request->tl,
+                'Kelas' => $request->kelas,
                 'Status_dlm_Klrg' => $request->sk,
                 'Nama_Ayah' => $request->nay,
                 'Nama_Ibu' => $request->nib,
@@ -162,8 +168,15 @@ class KepsekController extends Controller
                 'Sekolah_Asal' => $request->sa,
                 'Anak_Ke' => $request->ak,
             ]);
+            DB::table('users')->insert([
+                'name'=> 'siswa',
+                'email'=> strtolower(strtok($request->nama, ' ')).'@gmail.com',
+                'password'=> Hash::make('siswa'),
+                'role'=> 'Siswa',
+                'to_role'=> $request->nis,
+            ]);
             toast('Your Data as been submited!','success');
-            return redirect()->back();
+            return redirect('/superadmin/daftarkelassiswa');
         } else {
             toast('Your Data as failed submited!','error');
             return redirect()->back();
@@ -198,6 +211,7 @@ class KepsekController extends Controller
             'jp'=> 'required',
             'status'=> 'required',
             'jns_ptk'=> 'required',
+            'jjm'=> 'required',
             'statusK'=> 'required',
         ]);
         if ($data) {
@@ -212,6 +226,57 @@ class KepsekController extends Controller
                 'Jenjang_Pendidikan' => $request->jp,
                 'Status' => $request->status,
                 'Status_Kepegawaian' => $request->statusK,
+                'JJM' => $request->jjm,
+                'Jenis_PTK' => $request->jns_ptk,
+            ]);
+            DB::table('users')->insert([
+                'name'=> 'guru',
+                'email'=> strtolower(strtok($request->nama, ' ')).'@gmail.com',
+                'password'=> Hash::make('guru'),
+                'role'=> 'Guru',
+                'to_role'=> $request->id,
+            ]);
+            toast('Your data as been sumbit','success');
+            return redirect('/superadmin/daftarptk');
+        } else {
+            toast('Your data as failed sumbit','error');
+            return redirect()->back();
+        }
+    }
+
+    public function editptk ($kode) {
+        $data = DB::select('SELECT * FROM guruses WHERE NUPTK = ?', [$kode]);
+
+        return view('superadmin.manajemenuser.editptk-superadminMU', compact('data'));
+    }
+
+    public function editptkPost (Request $request) {
+        $data = $request->validate([
+            'id' => 'required',
+            'ids' => 'required',
+            'nama'=> 'required',
+            'jk'=> 'required',
+            'tempat'=> 'required',
+            'tanggal'=> 'required',
+            'tmp_kerja'=> 'required',
+            'jp'=> 'required',
+            'status'=> 'required',
+            'jns_ptk'=> 'required',
+            'jjm'=> 'required',
+            'statusK'=> 'required',
+        ]);
+        if ($data) {
+            DB::table('guruses')->where(['NUPTK' => $request->id])->update([
+                'NIP' => $request->ids,
+                'Nama_Guru' => $request->nama,
+                'Jenis_Kelamin' => $request->jk,
+                'TMT_Kerja' => $request->tmp_kerja,
+                'Tempat_Lahir' => $request->tempat,
+                'Tanggal_Lahir' => $request->tanggal,
+                'Jenjang_Pendidikan' => $request->jp,
+                'Status' => $request->status,
+                'Status_Kepegawaian' => $request->statusK,
+                'JJM' => $request->jjm,
                 'Jenis_PTK' => $request->jns_ptk,
             ]);
             toast('Your data as been sumbit','success');
@@ -230,6 +295,7 @@ class KepsekController extends Controller
 
     public function deleteptk($kode){
         DB::table('guruses')->where('NUPTK', $kode)->delete();
+        DB::table('users')->where('to_role', $kode)->delete();
         toast('Your data as been delete','success');
         return redirect()->back();
     }
@@ -266,6 +332,48 @@ class KepsekController extends Controller
                 'Jenjang_Pendidikan' => $request->jp,
                 'Status' => $request->status,
             ]);
+            DB::table('users')->insert([
+                'name'=> 'tatausaha',
+                'email'=> strtolower(strtok($request->nama, ' ')).'@gmail.com',
+                'password'=> Hash::make('tatausaha'),
+                'role'=> 'Admin',
+                'to_role'=> $request->id,
+            ]);
+            toast('Your data as been sumbit','success');
+            return redirect('/superadmin/daftartu');
+        } else {
+            toast('Your data as failed sumbit','error');
+            return redirect()->back();
+        }
+    }
+
+    public function edittu ($kode) {
+        $data = DB::select('SELECT * FROM tata_usahas WHERE ID_Pegawai = ?', [$kode]);
+
+        return view('superadmin.manajemenuser.edittu-superadminMU', compact('data'));
+    }
+
+    public function edittuPost(Request $request){
+        $data = $request->validate([
+            'id' => 'required',
+            'nama'=> 'required',
+            'jk'=> 'required',
+            'tempat'=> 'required',
+            'tanggal'=> 'required',
+            'tmp_kerja'=> 'required',
+            'jp'=> 'required',
+            'status'=> 'required',
+        ]);
+        if ($data) {
+            DB::table('tata_usahas')->where('ID_Pegawai', $request->id)->update([
+                'Nama_Pegawai' => $request->nama,
+                'Jenis_Kelamin' => $request->jk,
+                'TMT_Kerja' => $request->tmp_kerja,
+                'Tempat_Lahir' => $request->tempat,
+                'Tanggal_Lahir' => $request->tanggal,
+                'Jenjang_Pendidikan' => $request->jp,
+                'Status' => $request->status,
+            ]);
             toast('Your data as been sumbit','success');
             return redirect('/superadmin/daftartu');
         } else {
@@ -282,6 +390,7 @@ class KepsekController extends Controller
 
     public function deletetu($kode){
         DB::table('tata_usahas')->where('ID_Pegawai', $kode)->delete();
+        DB::table('users')->where('to_role', $kode)->delete();
         toast('Your data as been delete','success');
         return redirect()->back();
     }
@@ -292,9 +401,22 @@ class KepsekController extends Controller
         return view('superadmin/listraporsiswa-superadmin', compact('hasil'));
     }
 
-    public function listsiswaNS () {
+    public function listsiswaNS ($kode) {
+        $data = DB::select('SELECT * FROM siswas WHERE Kelas = ?', [$kode]);
 
-        return view('superadmin/listsiswa-superadminNS');
+
+        return view('superadmin/listsiswa-superadminNS', compact('data'));
+    }
+
+    public function listnilaisiswa($kode){
+        $data = DB::table('nilais')
+            ->join('mata_pelajarans', 'mata_pelajarans.Kode_Mapel', 'nilais.Kode_Mapel')
+            ->join('tahun_ajarans', 'tahun_ajarans.ID_Thn_Ajaran', 'nilais.Thn_Ajaran')
+            ->where('nilais.Siswa_ID', $kode)
+            ->select('nilais.*', 'mata_pelajarans.*', 'tahun_ajarans.Thn_Ajaran', 'tahun_ajarans.Semester')
+            ->get();
+        return view('superadmin/listnilaisiswa-superadminNS', compact('data'));
+
     }
 
     public function editraporsiswa () {
