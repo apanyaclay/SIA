@@ -19,7 +19,7 @@
           <th scope="row">{{$i}}</th>
           <td>{{$data[$i]->NISN}}</td>
           <td>{{$data[$i]->Nama_Siswa}}</td>
-        <td><a type="button" href="{{url('superadmin/listnilaisiswa', $data[$i]->NISN)}}"  class="btn btn-warning"><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i>Edit Rapor </a></td>       
+        <td><a type="button" href="{{url('superadmin/listnilaisiswa', $data[$i]->NISN)}}"  class="btn btn-warning"><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i>List Nilai</a></td>       
           </tr>
         @endfor
        </tbody>

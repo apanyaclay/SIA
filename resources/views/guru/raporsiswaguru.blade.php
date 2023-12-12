@@ -9,28 +9,20 @@
 <table  class="table text-center table-bordered  mt-4"style="width:900px ;" >
   <thead style="background-color: #748E63; color: #000;" >
     <tr>
-      <th scope="col">NO.</th>
-      <th scope="col">KELAS</th>
+      <th scope="col">KODE KELAS</th>
+      <th scope="col">NAMA KELAS</th>
       <th scope="col">DETAIL</th>
     </tr>
   </thead>
   
   <tbody >
+    @foreach ($data as $item)
     <tr>
-      <th scope="row">1</th>
-      <td>9-A</td>
-      <td><a type="button"  href="{{route('listsiswa')}}"  class="btn btn-warning">Lists Siswa</a></td>
+      <th scope="row">{{$item->ID_Kelas}}</th>
+      <td>{{$item->Nama_Kelas}}</td>
+      <td><a type="button"  href="{{url('guru/listsiswas', $item->ID_Kelas)}}"  class="btn btn-warning">Lists Siswa</a></td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>8-B </td>
-      <td><a type="button" href="{{route('listsiswa')}}"  class="btn btn-warning">Lists Siswa</a></td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>7-A</td>
-      <th scope="row"><a type="button" href="{{route('listsiswa')}}" class="btn btn-warning" >Lists Siswa </a></th>
-    </tr>
+    @endforeach
   </tbody>
 </table>
 </div> 

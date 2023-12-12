@@ -93,7 +93,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/jadwalsiswa/{kode}', [KepsekController::class, 'jadwalsiswa'])->name('jadwalsiswasadmin');
         Route::get('/daftarkelas', [KepsekController::class, 'daftarkelasVR'])->name('daftarkelasVR');
         Route::get('/listsiswaVR/{kode}', [KepsekController::class, 'listsiswaVR'])->name('listsiswaVR');
-        Route::get('/raporsiswa', [KepsekController::class, 'raporsiswa'])->name('raporsiswasadmin');
+        Route::get('/raporsiswa/{kode}', [KepsekController::class, 'raporsiswa'])->name('raporsiswasadmin');
         //Ekskul
         Route::get('/daftarekskul', [EkskulController::class, 'daftarekskul'])->name('daftarekskulsadmin');
         Route::get('/tambahekskul', [EkskulController::class, 'tambahekskul'])->name('tambahekskulsadmin');
@@ -105,7 +105,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/daftarekskulsiswa', [EkskulController::class, 'daftarekskulsiswa'])->name('daftarekskulsiswasadmin');
         Route::get('/editekskulsiswa/{kode}', [EkskulController::class, 'editekskulsiswa'])->name('editekskulsiswasadmin');
         Route::post('/editekskulsiswa', [EkskulController::class, 'editekskulsiswaPost'])->name('editekskulsiswaPost');
-        Route::get('/deleteekskulsiswa/{kode}', [EkskulController::class, 'deleteekskulsiswa'])->name('deleteekskulsiswa');
 
         Route::get('/audit', [KepsekController::class, 'audit'])->name('auditsadmin');
         Route::get('/profile', [ProfileController::class, 'profile'])->name('profilesadmin');
@@ -139,21 +138,53 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', [TatausahaController::class, 'index'])->name('tatausaha');
         Route::get('/daftarkelassiswa', [TatausahaController::class, 'daftarkelassiswa'])->name('daftarkelassiswa');
         Route::get('/tambahkelas', [TatausahaController::class, 'tambahkelas'])->name('tambahkelas');
-        Route::get('/listsiswa', [TatausahaController::class, 'listsiswa'])->name('listsiswaadmin');
-        Route::get('/tambahsiswa', [TatausahaController::class, 'tambahsiswa'])->name('tambahsiswa');
-        Route::get('/detailsiswa', [TatausahaController::class, 'detailsiswa'])->name('detailsiswa');
+        Route::post('/tambahkelas', [TatausahaController::class, 'tambahkelasPosts'])->name('tambahkelasPosts');
+
+
+        Route::get('/listsiswa/{kode}', [TatausahaController::class, 'listsiswa'])->name('listsiswaadmin');
+        Route::get('/tambahsiswa/{kode}', [TatausahaController::class, 'tambahsiswa'])->name('tambahsiswa');
+        Route::post('/tambahsiswa', [TatausahaController::class, 'tambahsiswasPost'])->name('tambahsiswasPost');
+        Route::get('/editsiswa/{kode}', [TatausahaController::class, 'editsiswa'])->name('editsiswa');
+        Route::post('/editsiswa', [TatausahaController::class, 'editsiswasPost'])->name('editsiswasPost');
+        Route::get('/deletesiswa/{kode}', [TatausahaController::class, 'deletesiswas'])->name('deletesiswas');
+        Route::get('/detailsiswa/{kode}', [TatausahaController::class, 'detailsiswa'])->name('detailsiswa');
+        //PTK
         Route::get('/daftarptk', [TatausahaController::class, 'daftarptk'])->name('daftarptk');
-        Route::get('/detailptk', [TatausahaController::class, 'detailptk'])->name('detailptk');
+        Route::get('/tambahptk', [TatausahaController::class, 'tambahptk'])->name('tambahptks');
+        Route::post('/tambahptk', [TatausahaController::class, 'tambahptksPost'])->name('tambahptksPost');
+        Route::get('/editptk/{kode}', [TatausahaController::class, 'editptk'])->name('editptks');
+        Route::post('/editptk', [TatausahaController::class, 'editptkPost'])->name('editptksPost');
+        Route::get('/detailptk/{kode}', [TatausahaController::class, 'detailptk'])->name('detailptks');
+        Route::get('/deleteptk/{kode}', [TatausahaController::class, 'deleteptk'])->name('deleteptks');
+
+        //TU
         Route::get('/daftartu', [TatausahaController::class, 'daftartu'])->name('daftartu');
-        Route::get('/detailtu', [TatausahaController::class, 'detailtu'])->name('detailtu');
+        Route::get('/tambahtu', [TatausahaController::class, 'tambahtu'])->name('tambahtus');
+        Route::post('/tambahtu', [TatausahaController::class, 'tambahtuPost'])->name('tambahtusPost');
+        Route::get('/edittu/{kode}', [TatausahaController::class, 'edittu'])->name('edittus');
+        Route::post('/edittu', [TatausahaController::class, 'edittuPost'])->name('edittusPost');
+        Route::get('/detailtu/{kode}', [TatausahaController::class, 'detailtu'])->name('detailtu');
+        Route::get('/deletetu/{kode}', [TatausahaController::class, 'deletetu'])->name('deletetu');
+
+
         Route::get('/listraporsiswa', [TatausahaController::class, 'listraporsiswa'])->name('listraporsiswa');
         Route::get('/raporsiswa', [TatausahaController::class, 'raporsiswa'])->name('raporsiswaadmin');
         Route::get('/editraporsiswa', [TatausahaController::class, 'editraporsiswa'])->name('editraporsiswa');
         Route::get('/daftarkelassiswaJS', [TatausahaController::class, 'daftarkelassiswaJS'])->name('daftarkelassiswaJS');
-        Route::get('/jadwalsiswa', [TatausahaController::class, 'jadwalsiswa'])->name('jadwalsiswa');
+        Route::get('/jadwalsiswa/{kode}', [TatausahaController::class, 'jadwalsiswa'])->name('jadwalsiswa');
+        //Ekskul
         Route::get('/daftarekskul', [TatausahaController::class, 'daftarekskul'])->name('daftarekskul');
         Route::get('/tambahekskul', [TatausahaController::class, 'tambahekskul'])->name('tambahekskul');
+        Route::post('/tambahekskul', [TatausahaController::class, 'tambahekskulPost'])->name('tambahekskulsPost');
+        Route::get('/editekskul/{kode}', [TatausahaController::class, 'editekskul'])->name('editekskul');
+        Route::post('/editekskul', [TatausahaController::class, 'editekskulPost'])->name('editekskulsPost');
+        Route::get('/deleteekskuls/{kode}', [TatausahaController::class, 'deleteekskul'])->name('deleteekskuls');
+        //Ekskul Siswa
         Route::get('/daftarekskulsiswa', [TatausahaController::class, 'daftarekskulsiswa'])->name('daftarekskulsiswa');
+        Route::get('/editekskulsiswa/{kode}', [TatausahaController::class, 'editekskulsiswa'])->name('editekskulsiswasadmin');
+        Route::post('/editekskulsiswa', [TatausahaController::class, 'editekskulsiswaPost'])->name('editekskulsiswaPost');
+        Route::get('/deleteekskulsiswa/{kode}', [TatausahaController::class, 'deleteekskulsiswa'])->name('deleteekskulsiswa');
+        //
         Route::get('/audit', [TatausahaController::class, 'audit'])->name('audit');
         Route::get('/log_aktivitas', [TatausahaController::class, 'log_aktivitas'])->name('log_aktivitas');
         Route::get('/log_guru', [TatausahaController::class, 'log_guru'])->name('log_guru');
@@ -163,6 +194,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/log_user', [TatausahaController::class, 'log_user'])->name('log_user');
         Route::get('/profile', [TatausahaController::class, 'profile'])->name('profileadmin');
         Route::get('/editprofile', [TatausahaController::class, 'editprofile'])->name('editprofileadmin');
+        Route::post('/editprofile', [TatausahaController::class, 'editprofileadminPost'])->name('editprofileadminPost');
     });
 
     //Guru
@@ -170,11 +202,22 @@ Route::middleware(['auth'])->group(function () {
         Route::redirect('/', '/guru/dashboard');
         Route::get('/dashboard', [GuruController::class, 'index'])->name('guru');
         Route::get('/jadwalmengajar', [GuruController::class, 'jadwalmengajar'])->name('jadwalmengajar');
+        Route::get('/daftarkelas', [GuruController::class, 'daftarkelas'])->name('daftarkelas');
         Route::get('/raporsiswa', [GuruController::class, 'raporsiswa'])->name('raporsiswa');
-        Route::get('/listsiswa', [GuruController::class, 'listsiswa'])->name('listsiswa');
-        Route::get('/tambahnilai', [GuruController::class, 'tambahnilai'])->name('tambahnilai');
+        Route::get('/listsiswa/{kode}', [GuruController::class, 'listsiswa'])->name('listsiswa');
+        Route::get('/listnilaisiswa/{kode}', [GuruController::class, 'listnilaisiswa'])->name('listnilaisiswa');
+        Route::get('/tambahnilai/{kode}', [GuruController::class, 'tambahnilai'])->name('tambahnilai');
+        Route::post('/tambahnilai', [GuruController::class, 'tambahnilaiPost'])->name('tambahnilaiPost');
+        Route::get('/editnilai/{kode}', [GuruController::class, 'editnilai'])->name('editnilai');
+        Route::post('/editnilai', [GuruController::class, 'editnilaiPost'])->name('editnilaiPost');
+        Route::get('/listsiswas/{kode}', [GuruController::class, 'listsiswas'])->name('listsiswas');
+        Route::get('/raporsiswas/{kode}', [GuruController::class, 'raporsiswas'])->name('raporsiswas');
+        Route::get('/editraporsiswa/{kode}', [GuruController::class, 'editraporsiswa'])->name('editraporsiswa');
+        Route::post('/editraporsiswa', [GuruController::class, 'editraporsiswaPost'])->name('editraporsiswaPost');
+        //profile
         Route::get('/profilelengkap', [GuruController::class, 'profilelengkap'])->name('profilelengkap');
         Route::get('/editprofile', [GuruController::class, 'editprofile'])->name('editprofileguru');
+        Route::post('/editprofile', [GuruController::class, 'editprofilePost'])->name('editprofileguruPost');
     });
 
     //Siswa
@@ -184,6 +227,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/jadwal', [SiswaController::class, 'jadwal'])->name('jadwal');
         Route::get('/profile', [SiswaController::class, 'profile'])->name('profile');
         Route::get('/editprofile', [SiswaController::class, 'editprofile'])->name('editprofile');
+        Route::post('/editprofile', [SiswaController::class, 'editprofilePost'])->name('editprofilePost');
         Route::get('/rapor', [SiswaController::class, 'rapor'])->name('rapor');
     });
 });

@@ -1,5 +1,4 @@
-@extends('layouts.main_siswa')
-
+@extends('layouts.main_guru')
 
 @section('container')
     <!-- Page Heading -->

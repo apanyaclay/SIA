@@ -88,7 +88,6 @@ class KepsekController extends Controller
 
         if ($data) {
             DB::table('siswas')->where(['NISN' => $request->nis])->update([
-                'NISN' => $request->nis,
                 'Nama_Siswa' => $request->nama,
                 'Jenis_Kelamin' => $request->jk,
                 'Tempat_Lahir' => $request->tempat,
@@ -409,13 +408,14 @@ class KepsekController extends Controller
     }
 
     public function listnilaisiswa($kode){
+        $siswa = DB::select('SELECT * FROM siswas WHERE NISN = ?', [$kode]);
         $data = DB::table('nilais')
             ->join('mata_pelajarans', 'mata_pelajarans.Kode_Mapel', 'nilais.Kode_Mapel')
             ->join('tahun_ajarans', 'tahun_ajarans.ID_Thn_Ajaran', 'nilais.Thn_Ajaran')
             ->where('nilais.Siswa_ID', $kode)
             ->select('nilais.*', 'mata_pelajarans.*', 'tahun_ajarans.Thn_Ajaran', 'tahun_ajarans.Semester')
             ->get();
-        return view('superadmin/listnilaisiswa-superadminNS', compact('data'));
+        return view('superadmin/listnilaisiswa-superadminNS', compact('data', 'siswa'));
 
     }
 
@@ -430,13 +430,13 @@ class KepsekController extends Controller
     }
 
     public function daftarmapel ($kode) {
+        $kelas = DB::select('SELECT * FROM kelas WHERE ID_Kelas = ?', [$kode]);
         $hasil = DB::table('mata_pelajarans')
             ->join('guruses', 'guruses.NUPTK', 'mata_pelajarans.Guru_Mapel')
             ->select('mata_pelajarans.*', 'guruses.*')
             ->get();
         
-
-        return view('superadmin/daftarmapel-superadminMP', compact('hasil'));
+        return view('superadmin/daftarmapel-superadminMP', compact('hasil', 'kelas'));
     }
 
     public function tambahmapel () {
@@ -550,18 +550,29 @@ class KepsekController extends Controller
 
     public function listsiswaVR ($kode) {
         $kelas = DB::select('SELECT Nama_Kelas FROM kelas WHERE ID_Kelas = ?', [$kode]);
-        $hasil = DB::table('absensi_kelas')
-        ->join('siswas', 'siswas.NISN', 'absensi_kelas.Siswa_ID')
-        ->where('absensi_kelas.Kelas', $kode)
-        ->select('siswas.Nama_Siswa', DB::raw('MAX(siswas.NISN) AS NISN'))
-        ->groupBy('siswas.Nama_Siswa')
-        ->get();
+        $hasil = DB::select('SELECT * FROM siswas WHERE Kelas = ?', [$kode]);
 
         return view('superadmin/listsiswa-superadminVR', compact('hasil', 'kelas'));
     }
 
-    public function raporsiswa () {
-        return view('superadmin/raporsiswa-superadmin');
+    public function raporsiswa ($kode) {
+        $prestasi = DB::select('SELECT * FROM prestasis WHERE Siswa = ?', [$kode]);
+        $rapor = DB::select('SELECT * FROM rapors WHERE Siswa_ID = ?', [$kode]);
+        $ekskul = DB::table('ekskul_siswas')
+            ->join('ekstrakurikulers', 'ekstrakurikulers.Kode_Ekskul', 'ekskul_siswas.Ekskul_Kode')
+            ->join('nilai_ekskuls', 'nilai_ekskuls.ID_Ekskul_Siswa', 'ekskul_siswas.ID_Ekskul_Siswa')
+            ->where('ekskul_siswas.Siswa_ID', $kode)
+            ->select('ekskul_siswas.*', 'ekstrakurikulers.*', 'nilai_ekskuls.*')
+            ->get();
+        
+        $nilai =  DB::table('nilais')
+        ->join('mata_pelajarans', 'mata_pelajarans.Kode_Mapel', 'nilais.Kode_Mapel')
+        ->where('nilais.Siswa_ID', $kode)
+        ->where('nilais.Jenis', 'UAS')
+        ->select('nilais.*', 'mata_pelajarans.*')
+        ->get();
+        
+        return view('superadmin/raporsiswa-superadmin', compact('ekskul', 'prestasi', 'nilai', 'rapor'));
     }
 
     

@@ -1,12 +1,12 @@
-@extends('layouts.main_superadmin')
+@extends('layouts.main_admin')
 
 @section('container')
     <!-- Page Heading -->
     <h1 class="jadwal h3 mb-0 text-gray-800"
-        style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; text-align: center;"> EDIT
+        style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; text-align: center;"> Edit Pegawai
         Tata Usaha </h1>
     <div class="informasi py-3 px-5">
-        <form action="{{ route('edittuPost') }}" method="POST">
+        <form action="{{ route('edittusPost') }}" method="POST">
             @csrf
             <table class="table mt-4">
                 @foreach ($data as $item)

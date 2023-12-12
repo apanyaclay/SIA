@@ -1,16 +1,15 @@
 @extends('layouts.main_superadmin')
 
 @section('container')
-
     <!-- Page Heading -->
     <div class="isi ">
-        <h1 class="jadwal h3 mb-0 text-gray-800" style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; text-align: center;"> PROFILE &nbsp;  LENGKAP</h1></div>
-                                
-        <div class="informasi py-3 px-3">
-          
-            <table class="table  mt-4">
-              <tr>
-            
+        <h1 class="jadwal h3 mb-0 text-gray-800"
+            style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; text-align: center;"> PROFILE
+            &nbsp; LENGKAP</h1>
+    </div>
+    <div class="informasi py-3 px-3">
+        <table class="table  mt-4">
+            <tr>
                 <th scope="col">NISN</th>
                 <th scope="col">Nama_Siswa</th>
                 <th scope="col">Jenis_Kelamin</th>
@@ -32,38 +31,29 @@
                 <th scope="col">Anak_Ke</th>
             </tr>
             </thead>
-            
-            <tbody >
+            <tbody>
                 <tr>
-                   @foreach($siswas as $siswa)
-                    <td>{{ $siswa->NISN }}</td>
-                    <td>{{ $siswa->Nama_Siswa }}</td>
-                    <td>{{ $siswa->Jenis_Kelamin }}</td>
-                    <td>{{ $siswa->Tempat_Lahir }}</td>
-                    <td>{{ $siswa->Tanggal_Lahir }}</td>
-                    <td>{{ $siswa->Agama }}</td>
-                    <td>{{ $siswa->Alamat }}</td>
-                    <td>{{ $siswa->No_hp }}</td>
-                    <td>{{ $siswa->Kelas }}</td>
-                    <td>{{ $siswa->Status_dlm_Klrg }}</td>
-                    <td>{{ $siswa->Nama_Ayah }}</td>
-                    <td>{{ $siswa->Nama_Ibu }}</td>
-                    <td>{{ $siswa->Pekerjaan_Ayah }}</td>
-                    <td>{{ $siswa->Pekerjaan_Ibu }}</td>
-                    <td>{{ $siswa->No_Rek_Bank }}</td>
-                    <td>{{ $siswa->Bank_Atas_Nama }}</td>
-                    <td>{{ $siswa->Status_Siswa }}</td>
-                    <td>{{ $siswa->Sekolah_Asal }}</td>
+                    @foreach ($siswas as $siswa)
+                        <td>{{ $siswa->NISN }}</td>
+                        <td>{{ $siswa->Nama_Siswa }}</td>
+                        <td>{{ $siswa->Jenis_Kelamin }}</td>
+                        <td>{{ $siswa->Tempat_Lahir }}</td>
+                        <td>{{ $siswa->Tanggal_Lahir }}</td>
+                        <td>{{ $siswa->Agama }}</td>
+                        <td>{{ $siswa->Alamat }}</td>
+                        <td>{{ $siswa->No_hp }}</td>
+                        <td>{{ $siswa->Kelas }}</td>
+                        <td>{{ $siswa->Status_dlm_Klrg }}</td>
+                        <td>{{ $siswa->Nama_Ayah }}</td>
+                        <td>{{ $siswa->Nama_Ibu }}</td>
+                        <td>{{ $siswa->Pekerjaan_Ayah }}</td>
+                        <td>{{ $siswa->Pekerjaan_Ibu }}</td>
+                        <td>{{ $siswa->No_Rek_Bank }}</td>
+                        <td>{{ $siswa->Bank_Atas_Nama }}</td>
+                        <td>{{ $siswa->Status_Siswa }}</td>
+                        <td>{{ $siswa->Sekolah_Asal }}</td>
                     @endforeach
                 </tr>
-            
-      
-      
-            
-                  
-      
         </table>
-        </div>
-        <!-- <button type="button" class="btn btn-secondary mt-3 mb-3" >Print Jadwal</button> -->
-                            </div>     
+    </div>
 @endsection

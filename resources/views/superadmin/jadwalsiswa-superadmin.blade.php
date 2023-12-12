@@ -2,7 +2,7 @@
 
 @section('container')
               <!-- Page Heading -->
-              <div class="isi ">s
+              <div class="isi ">
                 <h1 class="jadwal h3 mb-0 text-gray-800" style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; text-align: center;"> JADWAL {{$kelas[0]->Nama_Kelas}}</h1></div>
                                        
                 <table class="table text-center table-bordered  mt-4">

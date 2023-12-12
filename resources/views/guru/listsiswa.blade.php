@@ -22,10 +22,10 @@
             <th scope="row">{{$i+1}}</th>
             <th>{{$data[$i]->NISN}}</th>
             <td>{{$data[$i]->Nama_Siswa}}</td>
-            <td><a type="button"  href="{{url('guru/listnilaisiswa', $data[$i]->NISN)}}"  class="btn btn-warning"><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i>Lihat Detail</a>
+            <td><a type="button"  href="{{url('guru/raporsiswas', $data[$i]->NISN)}}"  class="btn btn-warning"><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i>Lihat Rapor</a>
             </td>
             <td>
-              <a type="button"  href="{{url('guru/tambahnilai', $data[$i]->NISN)}}"  class="btn btn-warning"><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i>Tambah Nilai</a>
+              <a type="button"  href="{{url('guru/editraporsiswa', $data[$i]->NISN)}}"  class="btn btn-warning"><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i>Edit Rapor</a>
             </td>
           </tr>
           @endfor

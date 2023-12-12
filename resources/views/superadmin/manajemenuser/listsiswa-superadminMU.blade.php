@@ -29,7 +29,7 @@
             <tbody>
                 @for ($i = 0; $i < count($siswa); $i++)
                     <tr>
-                        <td>{{ $i+1 }}</td>
+                        <td>{{ $i + 1 }}</td>
                         <td>{{ $siswa[$i]->NISN }}</td>
                         <td>{{ $siswa[$i]->Nama_Siswa }}</td>
                         <td>{{ $siswa[$i]->Kelas }}</td>

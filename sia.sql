@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2023 at 03:28 PM
+-- Generation Time: Dec 12, 2023 at 01:06 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -159,8 +159,8 @@ CREATE TABLE `guruses` (
 --
 
 INSERT INTO `guruses` (`NUPTK`, `NIP`, `Nama_Guru`, `Jenis_Kelamin`, `Tempat_Lahir`, `Tanggal_Lahir`, `Status_Kepegawaian`, `Jenis_PTK`, `Jenjang_Pendidikan`, `TMT_Kerja`, `JJM`, `Status`) VALUES
-(1148770671130093, '1222035608920007', 'Herlia Puspita Dewi', 'P', 'Pulau Raja', '1992-08-16', 'GTY/PTY', 'Guru Wali Kelas', 'S1-Bahasa Indonesia', '2017-07-18', 36, 'Aktif'),
-(1252771672230163, '121987652200', 'Putri Yunita', 'L', 'Medan', '1993-06-17', 'Guru Honor', '', 'S1-Ekonomi', '2016-07-18', 12, 'Diberhentikan'),
+(1148770671130093, '1222035608920007', 'Herlia Puspita Dewi A', 'P', 'Pulau Raja', '1992-08-16', 'GTY/PTY', 'Guru Wali Kelas', 'S1-Bahasa Indonesia', '2017-07-18', 36, 'Aktif'),
+(1252771672230163, '121987652200', 'Putri Yunita', 'P', 'Medan', '1993-06-17', 'GTY/PTY', 'Guru Mapel', 'S1-Ekonomi', '2016-07-18', 12, 'Aktif'),
 (1554758660110042, '1271142202800007', 'Muhammad Haris', 'L', 'Pangakalian', '1980-02-22', 'Guru Honor', 'Guru Mapel', 'S1-Hukum', '2019-07-15', 18, 'Aktif'),
 (2344763664110023, '1208304408060001', 'SYAHPUTRA EFENDI', 'L', 'MEDAN', '1985-10-12', 'GTY/PTY', 'Guru Mapel', 'S1 - MATEMATIKA', '2017-07-18', 30, 'Aktif'),
 (5853776677230002, '1207256105980001', 'Nurhasanah', 'P', 'Manunggal', '1998-05-21', 'GTY/PTY', 'Guru Wali Kelas', 'S1-Pendidikan Agama Islam', '2019-07-18', 12, 'Aktif'),
@@ -229,6 +229,7 @@ CREATE TABLE `kelas` (
 --
 
 INSERT INTO `kelas` (`ID_Kelas`, `Wali_Kelas`, `Nama_Kelas`, `Tingkatan`, `Kelompok_Kelas`) VALUES
+('asdfgasf', 9261764666210083, 'hfdsdf', '8', 'A'),
 ('SMP8A', 1148770671130093, 'Kelas 8-1', '8', 'A'),
 ('SMP8B', 9736764665230312, 'Kelas 8-2', '8', 'B'),
 ('SMP9A', 8450774675230033, 'Kelas 9-1', '9', 'A'),
@@ -259,7 +260,7 @@ CREATE TABLE `kepala_sekolahs` (
 --
 
 INSERT INTO `kepala_sekolahs` (`ID_Kepsek`, `Nama_Kepsek`, `Jenjang_Pendidikan`, `Jenis_Kelamin`, `Tempat_Lahir`, `Tanggal_Lahir`, `TMT_Kerja`, `Status`) VALUES
-(1, 'SYAFRIZAL', 'S-1 EKONOMI', 'L', 'MEDAN DENAI', '1993-06-17', '2016-07-18', 'Aktif');
+(15312312, 'SYAFRIZAL', 'S-1 EKONOMI', 'L', 'MEDAN DENAI', '1993-06-17', '2016-07-18', 'Aktif');
 
 -- --------------------------------------------------------
 
@@ -790,12 +791,13 @@ INSERT INTO `nilais` (`Nilai_ID`, `Kode_Mapel`, `Siswa_ID`, `Thn_Ajaran`, `Jenis
 (2, 'BIND', 117795632, 2, 'F2', 80, 78),
 (3, 'BIND', 117795632, 2, 'F3', 75, 78),
 (4, 'BIND', 117795632, 2, 'UTS', 80, 75),
-(5, 'BIND', 117795632, 2, 'UAS', 88, 75),
+(5, 'BIND', 117795632, 2, 'UAS', 88, 69),
 (6, 'BING', 117795632, 2, 'F1', 89, 80),
 (7, 'BING', 117795632, 2, 'F2', 80, 90),
 (8, 'BING', 117795632, 2, 'F3', 98, 78),
 (9, 'BING', 117795632, 2, 'UTS', 89, 78),
-(10, 'BING', 117795632, 2, 'UAS', 89, 78);
+(10, 'BING', 117795632, 2, 'UAS', 89, 78),
+(11, 'BIND', 114715088, 2, 'UAS', 88, 88);
 
 -- --------------------------------------------------------
 
@@ -806,16 +808,17 @@ INSERT INTO `nilais` (`Nilai_ID`, `Kode_Mapel`, `Siswa_ID`, `Thn_Ajaran`, `Jenis
 CREATE TABLE `nilai_ekskuls` (
   `ID_Nilai_Ekskul` int(11) NOT NULL,
   `ID_Ekskul_Siswa` varchar(10) NOT NULL,
-  `Nilai` enum('A','B','C','D','E') NOT NULL
+  `Nilai` enum('A','B','C','D','E') NOT NULL,
+  `Keterangan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `nilai_ekskuls`
 --
 
-INSERT INTO `nilai_ekskuls` (`ID_Nilai_Ekskul`, `ID_Ekskul_Siswa`, `Nilai`) VALUES
-(1, 'MNR001', ''),
-(2, 'PRK001', '');
+INSERT INTO `nilai_ekskuls` (`ID_Nilai_Ekskul`, `ID_Ekskul_Siswa`, `Nilai`, `Keterangan`) VALUES
+(1, 'MNR001', 'A', 'Sering Mengikuti Kegiatan Ekstrakulikuler'),
+(2, 'PRK001', 'A', 'Sering Mengikuti Kegiatan Ekstrakulikuler');
 
 -- --------------------------------------------------------
 
@@ -867,7 +870,7 @@ CREATE TABLE `prestasis` (
 --
 
 INSERT INTO `prestasis` (`ID_Prestasi`, `Siswa`, `Jenis_Prestasi`, `Deskripsi`, `Tanggal`) VALUES
-('P01', 78791950, '', 'Karate', '2023-10-12');
+('P01', 117795632, 'Non-Akademik', 'Karate', '2023-10-12');
 
 -- --------------------------------------------------------
 
@@ -877,12 +880,44 @@ INSERT INTO `prestasis` (`ID_Prestasi`, `Siswa`, `Jenis_Prestasi`, `Deskripsi`, 
 
 CREATE TABLE `rapors` (
   `ID_Rapor` int(11) NOT NULL,
-  `ID_Nilai` int(11) NOT NULL,
-  `ID_Ekskul_Nilai` int(11) NOT NULL,
-  `Prestasi_ID` varchar(10) NOT NULL,
-  `Absensi_ID` int(11) NOT NULL,
-  `Absensi_Ekskul` int(11) NOT NULL
+  `Siswa_ID` int(11) NOT NULL,
+  `Sikap_Spiritual` text NOT NULL,
+  `Deskrip_Spiritual` text NOT NULL,
+  `Sikap_Sosial` text NOT NULL,
+  `Deskrip_Sosial` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `rapors`
+--
+
+INSERT INTO `rapors` (`ID_Rapor`, `Siswa_ID`, `Sikap_Spiritual`, `Deskrip_Spiritual`, `Sikap_Sosial`, `Deskrip_Sosial`) VALUES
+(1, 117795632, 'B', 'Terbiasa berdoa sebelum dan sesudah melakukan kegiatan, menjalankan ibadah, memberi dan menjawab salam', 'A', 'Memiliki sikap social sangat baik, diantaranya : santun, disiplin, dan tanggung jawab yang baik, sangat responsif dalam pergaulan serta memiliki kepedulian sangat tinggi');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settings`
+--
+
+CREATE TABLE `settings` (
+  `id` int(11) NOT NULL,
+  `title` text NOT NULL,
+  `tentang` text NOT NULL,
+  `tujuan` text NOT NULL,
+  `visi_misi` text NOT NULL,
+  `alamat` text NOT NULL,
+  `kec_kota` text NOT NULL,
+  `provinsi` text NOT NULL,
+  `phone` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `settings`
+--
+
+INSERT INTO `settings` (`id`, `title`, `tentang`, `tujuan`, `visi_misi`, `alamat`, `kec_kota`, `provinsi`, `phone`) VALUES
+(1, 'SISTEM INFORMASI AKADEMIK', 'SMP Swasta Amalyatul Huda adalah salah satu satuan pendidikan dengan jenjang SMP di Tanjung Mulia, Kec. Medan Deli, Kota Medan, Sumatera Utara. Dalam menjalankan kegiatannya, SMP Swasta Amalyatul Huda berada di bawah naungan Kementerian Pendidikan dan Kebudayaan. SMP Swasta Amalyatul Huda beralamat di Jl. Nusa Indah gg. Kilang Padi No. 44 Pasar 8, Tanjung Mulia, Kec. Medan Deli, Kota Medan, Sumatera Utara, dengan kode pos 20241. NPSN dari sekolah Amalyatul Huda adalah 69961293. SK Pendirian sekolah ini dikeluarkan pada 14 Maret 2017 dengan nomor 420/3727.Sarpras/2017. Selain itu, sekolah Amalyatul Huda juga telah terakreditasi C dengan SK Akreditasi nomor 789/BANSM/PROVSU/LL/X/2018 yang dikeluarkan pada 10 Oktober 2018.', '1. Mengembangkan budaya sekolah yang religius melalui kegiatan keagamaan\n2. Mengadakan kegiatan yang mendukung prestasi siswa baik secara akademis maupun non akademis.\n3. Mewujudkan peserta didik yang bermoral dalam pembentukan karakter\n4. Membudayakan 5 S ( senyum, salam, sapa, sopan dan santun)\n5. Melaksanakan aktivitas siswa yang menghasilkan karya\n6. Melaksanakan kegiatan membersihkan lingkungan sekolah serta pengolahan sampah organik dan anorganik', 'Terwujudnya Peserta Didik Yang Bertaqwa, Cerdas Berkarakter, Kreatif Dan Berwawasan Lingkungan\r\n1. Menanamkan nilai-nilai ketaqwaan kepada Tuhan Yang Maha Esa\r\n2. Melaksanakan kegiatan keagamaan\r\n3. Menciptakan peserta didik yang unggul dalam berkompetisi\r\n4. Menciptakan peserta didik yang bermoral dan berbudi pekerti yang baik\r\n5. Mewujudkan peserta didik yang terampil dalam berkreasi\r\n6. Menciptakan lingkungan yang bersih, ama, dan tertib', 'No.44 A, Jl. Kilang Padi Pasar 8 veteran No.kel, Tj. Mulia', 'Kec. Medan Deli, Kota Medan', 'Sumatera Utara, 20241', '+62 853 7171 6868');
 
 -- --------------------------------------------------------
 
@@ -892,14 +927,14 @@ CREATE TABLE `rapors` (
 
 CREATE TABLE `siswas` (
   `NISN` int(11) NOT NULL,
-  `NIPD` int(11) NOT NULL,
   `Nama_Siswa` varchar(150) NOT NULL,
   `Jenis_Kelamin` enum('L','P') NOT NULL,
   `Tempat_Lahir` varchar(100) NOT NULL,
   `Tanggal_Lahir` date NOT NULL,
-  `Agama` enum('Kristen','Katholik','Hindu','Buddha','Konghucu') NOT NULL,
+  `Agama` enum('Kristen','Katholik','Hindu','Buddha','Konghucu','Islam') NOT NULL,
   `Alamat` varchar(255) NOT NULL,
   `No_hp` varchar(13) NOT NULL,
+  `Kelas` varchar(10) NOT NULL,
   `Status_dlm_Klrg` enum('Anak Kandung','Anak Tiri') NOT NULL,
   `Nama_Ayah` varchar(150) NOT NULL,
   `Nama_Ibu` varchar(150) NOT NULL,
@@ -916,16 +951,14 @@ CREATE TABLE `siswas` (
 -- Dumping data for table `siswas`
 --
 
-INSERT INTO `siswas` (`NISN`, `NIPD`, `Nama_Siswa`, `Jenis_Kelamin`, `Tempat_Lahir`, `Tanggal_Lahir`, `Agama`, `Alamat`, `No_hp`, `Status_dlm_Klrg`, `Nama_Ayah`, `Nama_Ibu`, `Pekerjaan_Ayah`, `Pekerjaan_Ibu`, `No_Rek_Bank`, `Bank_Atas_Nama`, `Status_Siswa`, `Sekolah_Asal`, `Anak_Ke`) VALUES
-(123, 0, 'Test', 'L', 'Medan', '2023-12-02', 'Kristen', 'Medan No 1', '088888843', 'Anak Kandung', 'Budi', 'Siti', 'Kantor', 'Kantor', NULL, NULL, 'Aktif', 'SDN 00057 Medan', 3),
-(12321, 0, 'sadsadasdas', 'L', 'asfasfas', '2023-12-04', 'Kristen', 'asdasvgadsv', '15234324', 'Anak Kandung', 'afd sdfsdf', 'sdf sd fFD sd', 'gfsdg fdsg fd', 'gfsdg fdsg fd', NULL, NULL, 'Lulus', 'asf af asdf dsg sdgsd', 12),
-(99999, 0, 'sadsad', 'L', 'asdsa', '2023-12-09', '', 'asdasdas', '75423523523', 'Anak Kandung', 'asdasdas', 'dcbvdfgbdf', 'sadasacd', 'asdasdasdas', '', '', 'Aktif', '', 2),
-(78791950, 0, 'ADITYA ALFARIZ', 'L', 'MEDAN', '2007-10-15', '', 'JL. K.L. YOS SUDARSO LINK III KM 9,5, KELURAHAN MABAR, KECAMATAN MEDAN DENAI, 20242', '082361335050', 'Anak Kandung', 'RAHMANSYAH', 'NUR ASYIAH', 'WIRASWASTA', 'TIDAK BEKERJA', '', '', 'Aktif', 'SDS PUTRA NEGERI', 1),
-(91676040, 211, 'ADAM AGUSTIAN', 'L', 'MEDAN', '2009-08-11', '', 'JL. NUSA INDAH GG. FLAMBOYAN, KELURAHAN TANJUNG MULIA, KECAMATAN MEDAN DELI, KODE POS 20241', '081397922960', 'Anak Kandung', 'ADI ISWANTO', 'WINARTIK', 'WIRASWASTA', 'TIDAK BEKERJA', '', '', 'Aktif', '', 2),
-(108254549, 0, 'AILA ALMIRA', 'P', 'MEDAN', '2010-09-16', '', 'JL. NUSA INDAH Gg. FLAMBOYAN, KELURAHAN TANJUNG MULIA, KECAMATAN MEDAN DELI, 20241', '085679037660', 'Anak Kandung', 'ANDI PURNAMA', 'BEDA MANDASARI', 'WIRASWASTA', 'TIDAK BEKERJA', '', '', 'Aktif', 'SDS AMALYATUL HUDA', 3),
-(109600822, 0, 'AFDU FIKAR Test', 'L', 'SEI MUKA', '2010-12-13', 'Kristen', 'JL. DUSUN IV A PASAR VII DESA MANUNGGAL, KECAMATAN MEDAN DENAI,', '082361335050', 'Anak Kandung', 'MISKUN', 'IIN NURLENI', 'WIRASWASTA', 'WIRASWASTA', '', '', 'Tidak Aktif', 'SDS AMALYATUL HUDA', 1),
-(114715088, 0, 'AHMAD JUHARI SITEPU', 'L', 'SEI MUKA 2', '2012-01-22', 'Kristen', 'DUSUN III Anjung Ganjang, KECAMATAN SIMPANG EMPAT,21271', '082267878625', 'Anak Kandung', 'AGUS SITEPU', 'DARMA WATI BR BUTAR BUTAR', 'WIRASWASTA', 'WIRASWASTA', '', '', 'Aktif', 'UPTD SDN 016546 TELUK DALAM', 1),
-(117795632, 0, 'ABDUL ROSYIIT', 'L', 'LANGKAT', '2011-04-26', 'Kristen', 'DUSUN 1 TANJUNG JATI KECAMATAN BINJAI, KODE POS 20761', '082164934533', 'Anak Kandung', 'MISDIANTO', 'SRI WAHYUNI', 'WIRASWASTA', 'WIRASWASTA', '', '', 'Lulus', 'SD NEGERI 026606', 3);
+INSERT INTO `siswas` (`NISN`, `Nama_Siswa`, `Jenis_Kelamin`, `Tempat_Lahir`, `Tanggal_Lahir`, `Agama`, `Alamat`, `No_hp`, `Kelas`, `Status_dlm_Klrg`, `Nama_Ayah`, `Nama_Ibu`, `Pekerjaan_Ayah`, `Pekerjaan_Ibu`, `No_Rek_Bank`, `Bank_Atas_Nama`, `Status_Siswa`, `Sekolah_Asal`, `Anak_Ke`) VALUES
+(1412612, 'DILLA FAHRA', 'P', 'MARELAN', '2023-11-28', 'Konghucu', 'JALAN ASDASDKJAS', '12312689', 'SMP8B', 'Anak Kandung', 'BUDI', 'SITI', 'WIRASWASTA', 'WIRASWASTA', NULL, NULL, 'Aktif', 'SD ASDASKGFASF', 1),
+(78791950, 'ADITYA ALFARIZ', 'L', 'MEDAN DENAI', '2007-10-15', 'Hindu', 'JL. K.L. YOS SUDARSO LINK III KM 9,5, KELURAHAN MABAR, KECAMATAN MEDAN DENAI, 20242', '082361335050', 'SMP8A', 'Anak Kandung', 'RAHMANSYAH', 'NUR ASYIAH', 'WIRASWASTA', 'WIRASWASTA', '', '', 'Aktif', 'SDS PUTRA NEGERI', 1),
+(91676040, 'ADAM AGUSTIAN', 'L', 'MEDAN', '2009-08-11', 'Islam', 'JL. NUSA INDAH GG. FLAMBOYAN, KELURAHAN TANJUNG MULIA, KECAMATAN MEDAN DELI, KODE POS 20241', '081397922960', 'SMP8A', 'Anak Kandung', 'ADI ISWANTO', 'WINARTIK', 'WIRASWASTA', 'WIRASWASTA', '', '', 'Aktif', 'SD Sutomo', 2),
+(108254549, 'AILA ALMIRA', 'P', 'MEDAN', '2010-09-16', 'Hindu', 'JL. NUSA INDAH Gg. FLAMBOYAN, KELURAHAN TANJUNG MULIA, KECAMATAN MEDAN DELI, 20241', '085679037660', 'SMP8A', 'Anak Kandung', 'ANDI PURNAMA', 'BEDA MANDASARI', 'WIRASWASTA', 'WIRASWASTA', '', '', 'Aktif', 'SDS AMALYATUL HUDA', 3),
+(109600822, 'AFDU FIKAR Test', 'L', 'SEI MUKA', '2010-12-13', 'Kristen', 'JL. DUSUN IV A PASAR VII DESA MANUNGGAL, KECAMATAN MEDAN DENAI,', '082361335050', 'SMP8A', 'Anak Kandung', 'MISKUN', 'IIN NURLENI', 'WIRASWASTA', 'WIRASWASTA', '', '', 'Aktif', 'SDS AMALYATUL HUDA', 1),
+(114715088, 'AHMAD JUHARI SITEPU', 'L', 'SEI MUKA 2', '2012-01-22', 'Kristen', 'DUSUN III Anjung Ganjang, KECAMATAN SIMPANG EMPAT,21271', '082267878625', 'SMP8A', 'Anak Kandung', 'AGUS SITEPU', 'DARMA WATI BR BUTAR BUTAR', 'WIRASWASTA', 'WIRASWASTA', '', '', 'Aktif', 'UPTD SDN 016546 TELUK DALAM', 1),
+(117795632, 'ABDUL ROSYIIT', 'L', 'LANGKAT', '2011-04-26', 'Katholik', 'DUSUN 1 TANJUNG JATI KECAMATAN BINJAI, KODE POS 20761', '082164934533', 'SMP8A', 'Anak Tiri', 'MISDIANTO', 'SRI WAHYUNI', 'WIRASWASTA', 'WIRASWASTA', '', '', 'Lulus', 'SD NEGERI 026606', 3);
 
 -- --------------------------------------------------------
 
@@ -988,6 +1021,7 @@ CREATE TABLE `users` (
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `role` enum('Kepala Sekolah','Siswa','Guru','Admin') NOT NULL,
+  `to_role` bigint(50) NOT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -997,11 +1031,27 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Super Admin', 'superadmin@gmail.com', '2023-12-06 12:03:55', '$2y$12$7izPmOB2lgA6c6Mbc9POmOM4/o1Wx..ztE7lKkuY3KBuzds6cs.9u', 'Kepala Sekolah', NULL, '2023-12-06 12:03:55', '2023-12-06 12:03:55'),
-(2, 'guru', 'guru@gmail.com', NULL, '$2y$12$7A2L9ZYwuVNVYaoblAd02eccmp/SAmFkI2mn16wJUhsXSh6prn2je', 'Guru', NULL, '2023-12-06 18:11:33', '2023-12-06 18:11:33'),
-(3, 'tatausaha', 'tatausaha@gmail.com', NULL, '$2y$12$/k2b5SMCHfoNkA0yitkXjOMaUOHP.zRMxHkiAd0iGfdQtccYlpATG', 'Admin', NULL, '2023-12-06 18:11:53', '2023-12-06 18:11:53'),
-(4, 'siswa', 'siswa@gmail.com', NULL, '$2y$12$xoh1U3zVQAA7o0r0gj8c/O1vzNT3pISK8D9pD.zoWPiKhUAmD1gmG', 'Siswa', '', '2023-12-06 18:12:05', '2023-12-06 18:12:05');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `to_role`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Super Admin', 'syafrizal@gmail.com', '2023-12-06 12:03:55', '$2y$12$7izPmOB2lgA6c6Mbc9POmOM4/o1Wx..ztE7lKkuY3KBuzds6cs.9u', 'Kepala Sekolah', 15312312, NULL, '2023-12-06 12:03:55', '2023-12-06 12:03:55'),
+(2, 'guru', 'herlia@gmail.com', NULL, '$2y$12$7A2L9ZYwuVNVYaoblAd02eccmp/SAmFkI2mn16wJUhsXSh6prn2je', 'Guru', 1148770671130093, NULL, '2023-12-06 18:11:33', '2023-12-06 18:11:33'),
+(3, 'tatausaha', 'chandra@gmail.com', NULL, '$2y$12$/k2b5SMCHfoNkA0yitkXjOMaUOHP.zRMxHkiAd0iGfdQtccYlpATG', 'Admin', 19880834, NULL, '2023-12-06 18:11:53', '2023-12-06 18:11:53'),
+(4, 'siswa', 'aditya@gmail.com', NULL, '$2y$12$xoh1U3zVQAA7o0r0gj8c/O1vzNT3pISK8D9pD.zoWPiKhUAmD1gmG', 'Siswa', 78791950, '', '2023-12-06 18:12:05', '2023-12-06 18:12:05'),
+(5, 'guru', 'putri@gmail.com', NULL, '$2y$12$7A2L9ZYwuVNVYaoblAd02eccmp/SAmFkI2mn16wJUhsXSh6prn2je', 'Guru', 1252771672230163, NULL, '2023-12-06 18:11:33', '2023-12-06 18:11:33'),
+(6, 'guru', 'haris@gmail.com', NULL, '$2y$12$7A2L9ZYwuVNVYaoblAd02eccmp/SAmFkI2mn16wJUhsXSh6prn2je', 'Guru', 1554758660110042, NULL, '2023-12-06 18:11:33', '2023-12-06 18:11:33'),
+(7, 'guru', 'syahputra@gmail.com', NULL, '$2y$12$7A2L9ZYwuVNVYaoblAd02eccmp/SAmFkI2mn16wJUhsXSh6prn2je', 'Guru', 2344763664110023, NULL, '2023-12-06 18:11:33', '2023-12-06 18:11:33'),
+(8, 'guru', 'nurhasanah@gmail.com', NULL, '$2y$12$7A2L9ZYwuVNVYaoblAd02eccmp/SAmFkI2mn16wJUhsXSh6prn2je', 'Guru', 5853776677230002, NULL, '2023-12-06 18:11:33', '2023-12-06 18:11:33'),
+(9, 'guru', 'della@gmail.com', NULL, '$2y$12$7A2L9ZYwuVNVYaoblAd02eccmp/SAmFkI2mn16wJUhsXSh6prn2je', 'Guru', 7545772673130023, NULL, '2023-12-06 18:11:33', '2023-12-06 18:11:33'),
+(10, 'guru', 'siti@gmail.com', NULL, '$2y$12$7A2L9ZYwuVNVYaoblAd02eccmp/SAmFkI2mn16wJUhsXSh6prn2je', 'Guru', 8450774675230033, NULL, '2023-12-06 18:11:33', '2023-12-06 18:11:33'),
+(11, 'guru', 'winastri@gmail.com', NULL, '$2y$12$7A2L9ZYwuVNVYaoblAd02eccmp/SAmFkI2mn16wJUhsXSh6prn2je', 'Guru', 9261764666210083, NULL, '2023-12-06 18:11:33', '2023-12-06 18:11:33'),
+(12, 'guru', 'nursakinah@gmail.com', NULL, '$2y$12$7A2L9ZYwuVNVYaoblAd02eccmp/SAmFkI2mn16wJUhsXSh6prn2je', 'Guru', 9736764665230312, NULL, '2023-12-06 18:11:33', '2023-12-06 18:11:33'),
+(13, 'guru', 'shafira@gmail.com', NULL, '$2y$12$7A2L9ZYwuVNVYaoblAd02eccmp/SAmFkI2mn16wJUhsXSh6prn2je', 'Guru', 125298476722301635, NULL, '2023-12-06 18:11:33', '2023-12-06 18:11:33'),
+(14, 'siswa', 'adam@gmail.com', NULL, '$2y$12$xoh1U3zVQAA7o0r0gj8c/O1vzNT3pISK8D9pD.zoWPiKhUAmD1gmG', 'Siswa', 91676040, '', '2023-12-06 18:12:05', '2023-12-06 18:12:05'),
+(15, 'siswa', 'aila@gmail.com', NULL, '$2y$12$xoh1U3zVQAA7o0r0gj8c/O1vzNT3pISK8D9pD.zoWPiKhUAmD1gmG', 'Siswa', 108254549, '', '2023-12-06 18:12:05', '2023-12-06 18:12:05'),
+(16, 'siswa', 'afdu@gmail.com', NULL, '$2y$12$xoh1U3zVQAA7o0r0gj8c/O1vzNT3pISK8D9pD.zoWPiKhUAmD1gmG', 'Siswa', 109600822, '', '2023-12-06 18:12:05', '2023-12-06 18:12:05'),
+(17, 'siswa', 'ahmad@gmail.com', NULL, '$2y$12$xoh1U3zVQAA7o0r0gj8c/O1vzNT3pISK8D9pD.zoWPiKhUAmD1gmG', 'Siswa', 114715088, '', '2023-12-06 18:12:05', '2023-12-06 18:12:05'),
+(18, 'siswa', 'abdul@gmail.com', NULL, '$2y$12$xoh1U3zVQAA7o0r0gj8c/O1vzNT3pISK8D9pD.zoWPiKhUAmD1gmG', 'Siswa', 117795632, '', '2023-12-06 18:12:05', '2023-12-06 18:12:05'),
+(19, 'siswa', 'dilla@gmail.com', NULL, '$2y$12$m/2FfoH.VNVF1qX65KHnoeYgMzm6yO3amkIWF1eIiWCtZKFabW.PW', 'Siswa', 1412612, NULL, NULL, NULL),
+(22, 'tatausaha', 'nabila@gmail.com', NULL, '$2y$12$qmg9gC6eJ4HbjKUpjknyv.bZdMmAlaRONB7wkTwiQKepZcOVxwiJS', 'Admin', 124123, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1143,17 +1193,20 @@ ALTER TABLE `prestasis`
 --
 ALTER TABLE `rapors`
   ADD PRIMARY KEY (`ID_Rapor`),
-  ADD KEY `rapors_id_nilai_foreign` (`ID_Nilai`),
-  ADD KEY `rapors_id_ekskul_nilai_foreign` (`ID_Ekskul_Nilai`),
-  ADD KEY `rapors_prestasi_id_foreign` (`Prestasi_ID`),
-  ADD KEY `rapors_absensi_id_foreign` (`Absensi_ID`),
-  ADD KEY `rapors_absensi_ekskul_foreign` (`Absensi_Ekskul`);
+  ADD KEY `rapors_id_nilai_foreign` (`Siswa_ID`);
+
+--
+-- Indexes for table `settings`
+--
+ALTER TABLE `settings`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `siswas`
 --
 ALTER TABLE `siswas`
-  ADD PRIMARY KEY (`NISN`);
+  ADD PRIMARY KEY (`NISN`),
+  ADD KEY `Kelas` (`Kelas`);
 
 --
 -- Indexes for table `tahun_ajarans`
@@ -1192,16 +1245,34 @@ ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
+-- AUTO_INCREMENT for table `nilais`
+--
+ALTER TABLE `nilais`
+  MODIFY `Nilai_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `rapors`
+--
+ALTER TABLE `rapors`
+  MODIFY `ID_Rapor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `settings`
+--
+ALTER TABLE `settings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Constraints for dumped tables
@@ -1284,11 +1355,13 @@ ALTER TABLE `prestasis`
 -- Constraints for table `rapors`
 --
 ALTER TABLE `rapors`
-  ADD CONSTRAINT `rapors_absensi_ekskul_foreign` FOREIGN KEY (`Absensi_Ekskul`) REFERENCES `absensi_ekskuls` (`ID_Absensi`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `rapors_absensi_id_foreign` FOREIGN KEY (`Absensi_ID`) REFERENCES `absensi_kelas` (`ID_Absensi`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `rapors_id_ekskul_nilai_foreign` FOREIGN KEY (`ID_Ekskul_Nilai`) REFERENCES `nilai_ekskuls` (`ID_Nilai_Ekskul`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `rapors_id_nilai_foreign` FOREIGN KEY (`ID_Nilai`) REFERENCES `nilais` (`Nilai_ID`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `rapors_prestasi_id_foreign` FOREIGN KEY (`Prestasi_ID`) REFERENCES `prestasis` (`ID_Prestasi`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `rapors_id_nilai_foreign` FOREIGN KEY (`Siswa_ID`) REFERENCES `siswas` (`NISN`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `siswas`
+--
+ALTER TABLE `siswas`
+  ADD CONSTRAINT `siswas_ibfk_1` FOREIGN KEY (`Kelas`) REFERENCES `kelas` (`ID_Kelas`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `wali_siswas`

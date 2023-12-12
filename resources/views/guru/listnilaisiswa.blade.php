@@ -1,4 +1,4 @@
-@extends('layouts.main_superadmin')
+@extends('layouts.main_guru')
 
 @section('container')
   <!-- Page Heading -->
@@ -14,6 +14,7 @@
            <th scope="col">KKM</th>
            <th scope="col">NILAI PENGETAHUAN</th>
            <th scope="col">NILAI KETERAMPILAN</th>
+           <th scope="col">AKSI</th>
          </tr>
        </thead>     
        <tbody >
@@ -26,6 +27,7 @@
           <td>{{$data[$i]->KKM}}</td>
           <td>{{$data[$i]->Nilai_Pengetahuan}}</td>
           <td>{{$data[$i]->Nilai_Keterampilan}}</td>
+          <td><a type="button"  href="{{url('guru/editnilai', $data[$i]->Nilai_ID)}}"  class="btn btn-warning"><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i>Edit Nilai</a></td>
           </tr>
         @endfor
        </tbody>

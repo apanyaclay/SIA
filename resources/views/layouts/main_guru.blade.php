@@ -52,15 +52,31 @@
                 </a>
             </li>
 
-             <!-- Pembatas -->
-             <hr class="sidebar-divider">
+            @if ($guru = DB::select('SELECT * FROM guruses WHERE NUPTK = ?', [Auth::user()->to_role]))
+            @if ($guru[0]->Jenis_PTK == 'Guru Wali Kelas')
+                <!-- Pembatas -->
+                <hr class="sidebar-divider">
+                <!-- Rapor-->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="{{route('raporsiswa')}}"  data-target="#collapseUtilities"
+                        aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fa fa-address-book" style="color: #ffc527;"></i>
+                        <span>RAPOR SISWA</span>
+                    </a>
+                </li>
+                @endif
+            @endif
 
-            <!-- Rapor-->
+            <!-- Pembatas -->
+            <hr class="sidebar-divider">
+
+
+            <!-- Nilai -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{route('raporsiswa')}}"  data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
+                <a class="nav-link collapsed" href="{{route('daftarkelas')}}"  data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fa fa-address-book" style="color: #ffc527;"></i>
-                    <span>RAPOR SISWA</span>
+                    <span>NILAI SISWA</span>
                 </a>
             </li>
 

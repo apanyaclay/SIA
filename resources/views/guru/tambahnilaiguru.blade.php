@@ -1,74 +1,53 @@
 @extends('layouts.main_guru')
 
 @section('container')
-   <!-- Page Heading -->
+    <!-- Page Heading -->
 
-   <table class="table">
-    <tr>
-      <td>NAMA SISWA</td>
-      <td>Kairi hbvibrevbi</td>
-    </tr>
-    <tr>
-      <td>KELAS</td>
-      <td>9-A</td>
-    </tr>
-    <tr>
-      <td>WALI KELAS</td>
-      <td>Asmirandah</td>
-    </tr>
-    <tr>
-      <td>SEMESTER</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td>TAHUN PELAJARAN</td>
-      <td>2023-2014</td>
-    </tr>
-</table>
-<!-- ISI DASHBOARD -->
-<div class="container-fluid">
+    <h1 class="jadwal h3 mb-0 text-gray-800"
+        style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; text-align: center;"> TAMBAH NILAI
+    </h1>
+    </div>
 
-<!-- Page Heading -->
-<div class="isi ">
-
-
-<!-- INPUT Siswa -->
-
-<table class="table table-bordered">
-<thead class="table-secondary">
-<tr>
-<th scope="col">TUGAS</th>
-<th scope="col">ULANGAN</th>
-<th scope="col">UJIAN</th>
-<th scope="col">AKSI</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><div class="nilaisiswa">
-<input type="number" class="form-control" id="" placeholder="">
-</div></td>
-<td><div class="nilaisiswa">
-<input type="number" class="form-control" id="" placeholder="">
-</div></td>
-<td><div class="nilaisiswa">
-<input type="number" class="form-control" id="" placeholder="">
-</div></td>
-<td><a type="button" href="" class="btn btn-warning" ><i class="fa-solid fa-file-pen" style="color: #ffffff;"></i></a>
-<a type="button" href="" class="btn btn-warning" ><i class="fa-solid fa-delete-left" style="color: #ffffff;"></i></a></td>
-</tr>
-</tbody>
-</table>
-
-<button type="button" class="btn btn-warning mt-3 mb-3" ><i class="fa-solid fa-floppy-disk" style="color: #ffffff;"></i> Simpan Perubahan </button>
-
-
-
-
-</div>
-</div>
+    <div class="tablewali">
+        <form action="{{route('tambahnilaiPost')}}" method="POST">
+          @csrf
+            <div class="form-group">
+                <label for="nis">NISN:</label>
+                <input type="text" class="form-control" id="nis" name="nis" value="{{$kode}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="kode">KODE MAPEL:</label>
+                <input type="text" class="form-control" id="kode" name="kode" value="{{$mapel[0]->Kode_Mapel}}" readonly>
+            </div>
+            <div class="form-group">
+              <label for="ta">TAHUN AJARAN:</label>
+              <select name="ta" id="ta" class="form-control">
+                <option value="">-- Silahkan Pilih --</option>
+                @foreach ($ta as $item)
+                    <option value="{{$item->ID_Thn_Ajaran}}">{{$item->Thn_Ajaran}} - {{$item->Semester}}</option>
+                @endforeach
+              </select>
+          </div>
+          <div class="form-group">
+            <label for="jenis">JENIS:</label>
+            <select name="jenis" id="jenis" class="form-control">
+              <option value="">-- Silahkan Pilih --</option>
+              <option value="F1">F1</option>
+              <option value="F2">F2</option>
+              <option value="F3">F3</option>
+              <option value="UTS">UTS</option>
+              <option value="UAS">UAS</option>
+            </select>
+        </div>
+        <div class="form-group">
+          <label for="np">NILAI PENGETAHUAN:</label>
+          <input type="number" class="form-control" id="np" name="np" required>
+        </div>
+        <div class="form-group">
+          <label for="nk">NILAI KETERAMPILAN:</label>
+          <input type="number" class="form-control" id="nk" name="nk" required>
+        </div>
+            <button type="submit" class="btn btn-warning">Tambah Nilai</button>
+        </form>
+    </div>
 @endsection
-
-
-
-    

@@ -1,4 +1,4 @@
-@extends('layouts.main_superadmin')
+@extends('layouts.main_admin')
 
 @section('container')
     <!-- Page Heading -->
@@ -6,7 +6,7 @@
         style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; text-align: center;"> Tambah Pegawai
         Tata Usaha </h1>
     <div class="informasi py-3 px-5">
-        <form action="{{ route('tambahtuPost') }}" method="POST">
+        <form action="{{ route('tambahtusPost') }}" method="POST">
             @csrf
             <table class="table mt-4">
                 <div class="form-group">

@@ -25,7 +25,11 @@
                                       @foreach ($data as $item)
                                       <div>{{$item->Nama_Guru}}</div>
                                       <div>{{$item->NUPTK}}</div>
-                                      <div>{{$item->Jenis_Kelamin}}</div>
+                                      <div>@if ($item->Jenis_Kelamin == 'L')
+                                          Laki-Laki
+                                      @else
+                                          Perempuan
+                                      @endif</div>
                                       @endforeach
                                     </div>
                                   </div>

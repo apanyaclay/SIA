@@ -10,49 +10,20 @@
            <thead style="background-color: #748E63; color: #000;">
              <tr>
                <th scope="col">HARI</th>
-               <th scope="col">KELAS</th>
+               <th scope="col">MAPEL</th>
                <th scope="col">JAM</th>
-               <th scope="col">RUANGAN</th>      
+               <th scope="col">KELAS</th>      
              </tr>
            </thead>
            <tbody class="table-group-divider table-warning">
-             <tr>
-               <th>SENIN</th>
-               <td>MATEMATIKA</td>
-               <td>09.00 - 11.00</td>
-               <td>101</td>
-             </tr>
-             <tr>
-               <th>SENIN</th>
-               <td>MATEMATIKA</td>
-               <td>09.00 - 11.00</td>
-               <td>101</td>
-             </tr>
-             <tr>
-               <th>SENIN</th>
-               <td>MATEMATIKA</td>
-               <td>09.00 - 11.00</td>
-               <td>101</td>
-             </tr>
-             <tr>
-               <th>SENIN</th>
-               <td>MATEMATIKA</td>
-               <td>09.00 - 11.00</td>
-               <td>101</td>
-             </tr>
-             <tr>
-               <th>SENIN</th>
-               <td>MATEMATIKA</td>
-               <td>09.00 - 11.00</td>
-               <td>101</td>
-             </tr>
-             <tr>
-               <th>SENIN</th>
-               <td>MATEMATIKA</td>
-               <td>09.00 - 11.00</td>
-               <td>101</td>
-             </tr>
-            
+            @foreach ($data as $item)
+            <tr>
+              <th>{{$item->Hari}}</th>
+              <td>{{$item->Nama_Mapel}}</td>
+              <td>{{$item->Waktu_Mulai}} - {{$item->Waktu_Selesai}}</td>
+              <td>{{$item->Nama_Kelas}}</td>
+            </tr>
+            @endforeach
            </tbody>
    </table>
    

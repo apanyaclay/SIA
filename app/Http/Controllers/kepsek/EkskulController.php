@@ -9,7 +9,10 @@ use Illuminate\Support\Facades\DB; // Import the DB facade
 class EkskulController extends Controller
 {
     public function daftarekskul () {
-        $ekstrakurikuler = DB::select('SELECT * FROM ekstrakurikulers');
+        $ekstrakurikuler = DB::table('ekstrakurikulers')
+            ->join('guruses', 'guruses.NUPTK', 'ekstrakurikulers.Guru_Ekskul')
+            ->select('ekstrakurikulers.*', 'guruses.*')
+            ->get();
 
         return view('superadmin/daftarekskul-superadmin', compact('ekstrakurikuler'));
     }

@@ -10,7 +10,6 @@
                        <th scope="col">NISN</th>
                        <th scope="col">NAMA</th>
                        <th scope="col">DETAIL RAPOR</th>
-                       <th scope="col">VALIDASI</th>
                      </tr>
                    </thead>
                    
@@ -19,13 +18,7 @@
                       <tr>
                         <th scope="row">{{$item->NISN}}</th>
                         <td>{{$item->Nama_Siswa}}</td>
-                        <td><a type="button"  href="{{route('raporsiswasadmin')}}"  class="btn btn-warning"> Lihat Rapor</a></td>
-                      <td>
-                          <input type="radio" class="btn-check" name="options-outlined"  >
-                          <label class="btn btn-outline-success" for="success-outlined">CONFIRM</label>
-                          <input type="radio" class="btn-check" name="options-outlined"  >
-                          <label class="btn btn-outline-danger" for="danger-outlined">REJECT</label>
-                      </td>
+                        <td><a type="button"  href="{{url('superadmin/raporsiswa', $item->NISN)}}"  class="btn btn-warning"> Lihat Rapor</a></td>
                       </tr>
                     @endforeach
                    </tbody>

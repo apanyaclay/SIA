@@ -7,7 +7,7 @@
     <!-- Page Heading -->
     <h1 class="jadwal h3 mb-0 text-gray-800"
         style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; text-align: center;"> DAFTAR MATA
-        PELAJARAN KELAS (XA) </h1>
+        PELAJARAN {{$kelas[0]->Nama_Kelas}} </h1>
     </div>
     <div class="tablewali">
         <table class="table text-center table-bordered  mt-4"style="width:900px ;">

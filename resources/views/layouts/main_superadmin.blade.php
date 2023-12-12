@@ -108,7 +108,7 @@
               <a class="nav-link collapsed" href="{{ route('daftarkelasVR')}}"  data-target="#collapsePages"
                   aria-expanded="true" aria-controls="collapsePages">
                   <i class="fa-solid fa-file-circle-check"  style="color: #ffc527;"></i>
-                  <span>Validasi Rapor</span>
+                  <span>Rapor Siswa</span>
               </a>
           </li>
  
@@ -143,6 +143,18 @@
                   <span> Audit</span>
               </a>
           </li>
+
+           <!-- Divider -->
+         <hr class="sidebar-divider">
+ 
+         <!-- Setting -->
+         <li class="nav-item">
+             <a class="nav-link collapsed" href="{{ route('profilesadmin')}}"  data-target="#collapsePages"
+                 aria-expanded="true" aria-controls="collapsePages">
+                 <i class="fas fa-gear" style="color: #ffc527;"></i>
+                 <span> Setting</span>
+             </a>
+         </li>
  
          <!-- Divider -->
          <hr class="sidebar-divider">

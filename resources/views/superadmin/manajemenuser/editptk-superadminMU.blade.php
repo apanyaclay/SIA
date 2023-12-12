@@ -3,7 +3,7 @@
 @section('container')
 
          <!-- Page Heading -->
-         <h1 class="jadwal h3 mb-0 text-gray-800" style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; text-align: center;"> TAMBAH PTK</h1>
+         <h1 class="jadwal h3 mb-0 text-gray-800" style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; text-align: center;"> EDIT PTK</h1>
          <div class="informasi py-3 px-5">    
             <form action="{{route('editptkPost')}}" method="POST">
               @csrf
@@ -102,7 +102,7 @@
                 </div>
                 @endforeach
                   </table>
-                   <button type="submit" class="btn btn-warning">Tambah</button>
+                   <button type="submit" class="btn btn-warning">Edit</button>
                   </form>
               </div>
           </div>
